@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Classes Schedule - EcomWithNaveed</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* Additional Styles for Timetable */
+        .timetable {
+            background-color: var(--white);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+            margin-bottom: 50px;
+        }
+        
+        .timetable-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: var(--white);
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .timetable-header h2 {
+            margin-bottom: 10px;
+        }
+        
+        .timetable-header p {
+            opacity: 0.9;
+            margin-bottom: 0;
+        }
+        
+        .timetable-grid {
+            display: grid;
+            grid-template-columns: 150px repeat(5, 1fr);
+        }
+        
+        .time-column {
+            background-color: var(--dark-color);
+            color: var(--white);
+        }
+        
+        .time-slot {
+            padding: 15px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 500;
+        }
+        
+        .day-header {
+            background-color: var(--primary-color);
+            color: var(--white);
+            text-align: center;
+            padding: 15px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .lecture-card {
+            padding: 20px;
+            border-bottom: 1px solid #eee;
+            height: 100%;
+            transition: var(--transition);
+        }
+        
+        .lecture-card:hover {
+            background-color: #f9f9f9;
+        }
+        
+        .lecture-card h4 {
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+        
+        .lecture-time {
+            font-size: 0.85rem;
+            color: var(--text-light);
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .lecture-time i {
+            margin-right: 5px;
+        }
+        
+        .lecture-objectives {
+            margin-top: 10px;
+        }
+        
+        .lecture-objectives h5 {
+            font-size: 0.9rem;
+            color: var(--dark-color);
+            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .lecture-objectives ul {
+            list-style: none;
+            padding-left: 0;
+            margin-bottom: 0;
+        }
+        
+        .lecture-objectives li {
+            position: relative;
+            padding-left: 20px;
+            margin-bottom: 5px;
+            font-size: 0.85rem;
+        }
+        
+        .lecture-objectives li:before {
+            content: '\f054';
+            font-family: 'Font Awesome 5 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 0;
+            top: 2px;
+            font-size: 0.7rem;
+            color: var(--primary-color);
+        }
+        
+        .batch-info {
+            background-color: #f8f9fa;
+            border-radius: 10px;
+            padding: 30px;
+            margin-bottom: 40px;
+            box-shadow: var(--box-shadow);
+        }
+        
+        .batch-info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .batch-info-card {
+            display: flex;
+            align-items: center;
+        }
+        
+        .batch-info-card i {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            margin-right: 15px;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(74, 107, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .batch-info-content h4 {
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+        }
+        
+        .batch-info-content p {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            margin-bottom: 0;
+        }
+        
+        @media (max-width: 992px) {
+            .timetable-grid {
+                grid-template-columns: 100px repeat(5, 1fr);
+            }
+            
+            .lecture-card {
+                padding: 15px 10px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .timetable-grid {
+                grid-template-columns: 80px repeat(5, 1fr);
+            }
+            
+            .day-header {
+                font-size: 0.8rem;
+                padding: 10px 5px;
+            }
+            
+            .time-slot {
+                font-size: 0.8rem;
+                padding: 10px 5px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .timetable {
+                overflow-x: auto;
+            }
+            
+            .timetable-grid {
+                width: 800px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <h1>EcomWithNaveed</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="courses.html">Courses</a></li>
+                    <li><a href="classes.html" class="active">Online Classes</a></li>
+                </ul>
+            </nav>
+            <div class="cta-button">
+                <a href="https://wa.me/923001234567" class="btn whatsapp-btn">
+                    <i class="fab fa-whatsapp"></i> Chat Now
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <section class="page-header">
+        <div class="container">
+            <h1>Online Classes Schedule</h1>
+            <p>Comprehensive e-commerce training with expert guidance</p>
+        </div>
+    </section>
+
+    <section class="batch-info">
+        <div class="container">
+            <h2 class="text-center">Batch Information</h2>
+            <div class="batch-info-grid">
+                <div class="batch-info-card">
+                    <i class="far fa-calendar-alt"></i>
+                    <div class="batch-info-content">
+                        <h4>Batch Start Date</h4>
+                        <p>November 15, 2023</p>
+                    </div>
+                </div>
+                <div class="batch-info-card">
+                    <i class="far fa-clock"></i>
+                    <div class="batch-info-content">
+                        <h4>Duration</h4>
+                        <p>4 Weeks (20 Sessions)</p>
+                    </div>
+                </div>
+                <div class="batch-info-card">
+                    <i class="fas fa-users"></i>
+                    <div class="batch-info-content">
+                        <h4>Class Size</h4>
+                        <p>Limited to 30 participants</p>
+                    </div>
+                </div>
+                <div class="batch-info-card">
+                    <i class="fas fa-chalkboard-teacher"></i>
+                    <div class="batch-info-content">
+                        <h4>Instructor</h4>
+                        <p>Naveed Ahmed (E-commerce Expert)</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="timetable-section">
+        <div class="container">
+            <div class="timetable">
+                <div class="timetable-header">
+                    <h2>E-Commerce Mastery Program</h2>
+                    <p>Comprehensive Schedule - Week 1</p>
+                </div>
+                <div class="timetable-grid">
+                    <div class="time-column">
+                        <div class="time-slot" style="height: 80px;"></div>
+                        <div class="time-slot">9:00 AM</div>
+                        <div class="time-slot">10:30 AM</div>
+                        <div class="time-slot">12:00 PM</div>
+                        <div class="time-slot">2:00 PM</div>
+                        <div class="time-slot">3:30 PM</div>
+                    </div>
+                    
+                    <div class="day-column">
+                        <div class="day-header">Monday</div>
+                        <div class="lecture-card">
+                            <h4>Introduction to E-Commerce</h4>
+                            <div class="lecture-time">
+                                <i class="far fa-clock"></i> 9:00 AM - 10:30 AM
+                            </div>
+                            <p>Overview of the e-commerce landscape and opportunities</p>
+                            <div class="lecture-objectives">
+                                <h5><i class="fas fa-bullseye"></i> Learning Objectives</h5>
+                                <ul>
+                                    <li>Understand e-commerce business models</li>
+                                    <li>Identify profitable niches</li>
+                                    <li>Learn market research techniques</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="lecture-card">
+                            <h4>Platform Selection</h4>
+                            <div class="lecture-time">
+                                <i class="far fa-clock"></i> 12:00 PM - 1:30 PM
+                            </div>
+                            <p>Comparing Shopify, WooCommerce, and custom solutions</p>
+                            <div class="lecture-objectives">
+                                <h5><i class="fas fa-bullseye"></i> Learning Objectives</h5>
+                                <ul>
+                                    <li>Evaluate different e-commerce platforms</li>
+                                    <li>Understand technical requirements</li>
+                                    <li>Make informed platform choices</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="day-column">
+                        <div class="day-header">Tuesday</div>
+                        <div class="lecture-card">
+                            <h4>Store Setup Workshop</h4>
+                            <div class="lecture-time">
+                                <i class="far fa-clock"></i> 9:00 AM - 10:30 AM
+                            </div>
+                            <p>Hands-on session for creating your first store</p>
+                            <div class="lecture-objectives">
+                                <h5><i class="fas fa-bullseye"></i> Learning Objectives</h5>
+                                <ul>
+                                    <li>Step-by-step store creation</li>
+                                    <li>Domain and hosting setup</li>
+                                    <li>Basic store configuration</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="lecture-card">
+                            <h4>Product Sourcing</h4>
+                            <div class="lecture-time">
+                                <i class="far fa-clock"></i> 3:30 PM - 5:00 PM
+                            </div>
+                            <p>Finding reliable suppliers and products</p>
+                            <div class="lecture-objectives">
+                                <h5><i class="fas fa-bullseye"></i> Learning Objectives</h5>
+                                <ul>
+                                    <li>Identify local and international suppliers</li>
+                                    <li>Evaluate product viability</li>
+                                    <li>Understand import/export basics</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="day-column">
+                        <div class="day-header">Wednesday</div>
+                        <div class="lecture-card">
+                            <h4>Product Listing Optimization</h4>
+                            <div class="lecture-time">
+                                <i class="far fa-clock"></i> 10:30 AM - 12:00 PM
+                            </div>
+                            <p>Creating compelling product pages that convert</p>
+                            <div class="lecture-objectives">
+                                <h5><i class="fas fa-bullseye"></i> Learning Objectives</h5>
+                                <ul>
+                                    <li>Write effective product descriptions</li>
+                                    <li>Optimize product images</li>
+                                    <li>Implement SEO best practices</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="day-column">
+                        <div class="day-header">Thursday</div>
+                        <div class="lecture-card">
+                            <h4>Payment Gateways</h4>
+                            <div class="lecture-time">
+                                <i class="far fa-clock"></i> 2:00 PM - 3:30 PM
+                            </div>
+                            <p>Setting up payment processing for Pakistan</p>
+                            <div class="lecture-objectives">
+                                <h5><i class="fas fa-bullseye"></i> Learning Objectives</h5>
+                                <ul>
+                                    <li>Integrate JazzCash/EasyPaisa</li>
+                                    <li>Set up international payments</li>
+                                    <li>Understand transaction fees</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="day-column">
+                        <div class="day-header">Friday</div>
+                        <div class="lecture-card">
+                            <h4>Digital Marketing Fundamentals</h4>
+                            <div class="lecture-time">
+                                <i class="far fa-clock"></i> 9:00 AM - 10:30 AM
+                            </div>
+                            <p>Introduction to driving traffic to your store</p>
+                            <div class="lecture-objectives">
+                                <h5><i class="fas fa-bullseye"></i> Learning Objectives</h5>
+                                <ul>
+                                    <li>Understand marketing channels</li>
+                                    <li>Create a basic marketing plan</li>
+                                    <li>Set up social media profiles</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="lecture-card">
+                            <h4>Facebook Ads Workshop</h4>
+                            <div class="lecture-time">
+                                <i class="far fa-clock"></i> 12:00 PM - 1:30 PM
+                            </div>
+                            <p>Hands-on training for creating effective ads</p>
+                            <div class="lecture-objectives">
+                                <h5><i class="fas fa-bullseye"></i> Learning Objectives</h5>
+                                <ul>
+                                    <li>Set up Facebook Business Manager</li>
+                                    <li>Create high-converting ad creatives</li>
+                                    <li>Launch your first campaign</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="day-column">
+                        <div class="day-header">Saturday</div>
+                        <div class="lecture-card">
+                            <h4>Q&A Session</h4>
+                            <div class="lecture-time">
+                                <i class="far fa-clock"></i> 10:30 AM - 12:00 PM
+                            </div>
+                            <p>Open forum to address student questions</p>
+                            <div class="lecture-objectives">
+                                <h5><i class="fas fa-bullseye"></i> Learning Objectives</h5>
+                                <ul>
+                                    <li>Clarify week's concepts</li>
+                                    <li>Troubleshoot student projects</li>
+                                    <li>Provide personalized guidance</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="lecture-card">
+                            <h4>Case Study Analysis</h4>
+                            <div class="lecture-time">
+                                <i class="far fa-clock"></i> 2:00 PM - 3:30 PM
+                            </div>
+                            <p>Review of successful Pakistani e-commerce stores</p>
+                            <div class="lecture-objectives">
+                                <h5><i class="fas fa-bullseye"></i> Learning Objectives</h5>
+                                <ul>
+                                    <li>Analyze successful strategies</li>
+                                    <li>Identify key success factors</li>
+                                    <li>Apply lessons to own business</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center">
+                <h3>Upcoming Weeks Will Cover:</h3>
+                <div class="upcoming-weeks">
+                    <div class="week-card">
+                        <h4>Week 2: Advanced Marketing</h4>
+                        <p>Google Ads, Email Marketing, Influencer Collaborations</p>
+                    </div>
+                    <div class="week-card">
+                        <h4>Week 3: Operations & Scaling</h4>
+                        <p>Inventory Management, Customer Service, Automation</p>
+                    </div>
+                    <div class="week-card">
+                        <h4>Week 4: Business Growth</h4>
+                        <p>Advanced Scaling, Funding Options, Exit Strategies</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="enrollment-section">
+        <div class="container">
+            <div class="enrollment-box">
+                <h2>Ready to Transform Your E-Commerce Skills?</h2>
+                <p>Limited seats available for our next batch. Enrollment closes soon!</p>
+                <div class="enrollment-buttons">
+                    <a href="https://wa.me/923001234567" class="btn whatsapp-btn">
+                        <i class="fab fa-whatsapp"></i> Enroll via WhatsApp
+                    </a>
+                    <a href="courses.html" class="btn secondary-btn">
+                        View Course Details
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3>EcomWithNaveed</h3>
+                    <p>Your gateway to e-commerce success through expert-led online courses and training programs.</p>
+                </div>
+                <div class="footer-col">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="courses.html">Courses</a></li>
+                        <li><a href="classes.html">Online Classes</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Contact Us</h3>
+                    <ul>
+                        <li><i class="fas fa-envelope"></i> info@ecomwithnaveed.com</li>
+                        <li><i class="fas fa-phone"></i> +92 300 1234567</li>
+                        <li><i class="fas fa-map-marker-alt"></i> Lahore, Pakistan</li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Follow Us</h3>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="https://wa.me/923001234567"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 EcomWithNaveed. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html>

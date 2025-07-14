@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Commerce Blog - EcomWithNaveed</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* Blog Page Specific Styles */
+        .blog-hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('images/blog-hero.jpg');
+            background-size: cover;
+            background-position: center;
+            color: var(--white);
+            text-align: center;
+            padding: 120px 0 80px;
+        }
+        
+        .blog-hero h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+        
+        .blog-hero p {
+            max-width: 700px;
+            margin: 0 auto 30px;
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        .blog-search {
+            max-width: 600px;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        .blog-search input {
+            width: 100%;
+            padding: 15px 20px;
+            border-radius: 50px;
+            border: none;
+            font-size: 1rem;
+            padding-right: 50px;
+        }
+        
+        .blog-search button {
+            position: absolute;
+            right: 5px;
+            top: 5px;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+        
+        .blog-categories {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin: 40px 0;
+        }
+        
+        .category-btn {
+            padding: 8px 20px;
+            background: rgba(255,255,255,0.1);
+            color: var(--white);
+            border-radius: 50px;
+            font-size: 0.9rem;
+            transition: var(--transition);
+        }
+        
+        .category-btn:hover, 
+        .category-btn.active {
+            background: var(--primary-color);
+        }
+        
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+            margin: 50px 0;
+        }
+        
+        .blog-card {
+            background: var(--white);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+        }
+        
+        .blog-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+        
+        .blog-img {
+            height: 220px;
+            overflow: hidden;
+        }
+        
+        .blog-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+        
+        .blog-card:hover .blog-img img {
+            transform: scale(1.05);
+        }
+        
+        .blog-content {
+            padding: 25px;
+        }
+        
+        .blog-meta {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            font-size: 0.85rem;
+            color: var(--text-light);
+        }
+        
+        .blog-meta span {
+            display: flex;
+            align-items: center;
+            margin-right: 15px;
+        }
+        
+        .blog-meta i {
+            margin-right: 5px;
+            font-size: 0.9rem;
+        }
+        
+        .blog-content h3 {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            line-height: 1.4;
+        }
+        
+        .blog-content p {
+            margin-bottom: 20px;
+            color: var(--text-light);
+            font-size: 0.95rem;
+        }
+        
+        .read-more {
+            display: inline-flex;
+            align-items: center;
+            color: var(--primary-color);
+            font-weight: 500;
+            transition: var(--transition);
+        }
+        
+        .read-more i {
+            margin-left: 5px;
+            transition: var(--transition);
+        }
+        
+        .read-more:hover {
+            color: var(--dark-color);
+        }
+        
+        .read-more:hover i {
+            transform: translateX(3px);
+        }
+        
+        .blog-sidebar {
+            background: var(--white);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: var(--box-shadow);
+            margin-bottom: 30px;
+        }
+        
+        .sidebar-title {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #eee;
+            position: relative;
+        }
+        
+        .sidebar-title:after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background: var(--primary-color);
+        }
+        
+        .popular-posts {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .popular-post {
+            display: flex;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .popular-post:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+        
+        .popular-post-img {
+            width: 80px;
+            height: 60px;
+            border-radius: 5px;
+            overflow: hidden;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+        
+        .popular-post-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .popular-post-content h4 {
+            font-size: 0.95rem;
+            margin-bottom: 5px;
+            line-height: 1.4;
+        }
+        
+        .popular-post-content span {
+            font-size: 0.8rem;
+            color: var(--text-light);
+        }
+        
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tag {
+            padding: 5px 15px;
+            background: #f5f5f5;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            transition: var(--transition);
+        }
+        
+        .tag:hover {
+            background: var(--primary-color);
+            color: var(--white);
+        }
+        
+        .newsletter-form input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+        }
+        
+        .newsletter-form button {
+            width: 100%;
+            padding: 12px;
+            background: var(--primary-color);
+            color: var(--white);
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .newsletter-form button:hover {
+            background: var(--dark-color);
+        }
+        
+        .blog-container {
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            gap: 40px;
+        }
+        
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin-top: 50px;
+        }
+        
+        .page-link {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 5px;
+            margin: 0 5px;
+            background: var(--white);
+            color: var(--dark-color);
+            transition: var(--transition);
+        }
+        
+        .page-link:hover,
+        .page-link.active {
+            background: var(--primary-color);
+            color: var(--white);
+        }
+        
+        @media (max-width: 992px) {
+            .blog-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .blog-sidebar {
+                margin-top: 50px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .blog-hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .blog-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <h1>EcomWithNaveed</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="blog.html" class="active">Blog</a></li>
+                    <li><a href="courses.html">Courses</a></li>
+                    <li><a href="classes.html">Online Classes</a></li>
+                </ul>
+            </nav>
+            <div class="cta-button">
+                <a href="https://wa.me/923001234567" class="btn whatsapp-btn">
+                    <i class="fab fa-whatsapp"></i> Chat Now
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <section class="blog-hero">
+        <div class="container">
+            <h1>E-Commerce Insights & Strategies</h1>
+            <p>Discover the latest trends, tips, and techniques to grow your online business in Pakistan's competitive market.</p>
+            <div class="blog-search">
+                <input type="text" placeholder="Search articles...">
+                <button type="submit"><i class="fas fa-search"></i></button>
+            </div>
+            <div class="blog-categories">
+                <a href="#" class="category-btn active">All Topics</a>
+                <a href="#" class="category-btn">Dropshipping</a>
+                <a href="#" class="category-btn">Shopify</a>
+                <a href="#" class="category-btn">Marketing</a>
+                <a href="#" class="category-btn">SEO</a>
+                <a href="#" class="category-btn">Success Stories</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="blog-section">
+        <div class="container">
+            <div class="blog-container">
+                <div class="blog-main">
+                    <div class="blog-grid">
+                        <article class="blog-card">
+                            <div class="blog-img">
+                                <img src="images/blog1.jpg" alt="E-commerce Trends">
+                            </div>
+                            <div class="blog-content">
+                                <div class="blog-meta">
+                                    <span><i class="far fa-calendar-alt"></i> Oct 15, 2023</span>
+                                    <span><i class="far fa-comments"></i> 12 Comments</span>
+                                </div>
+                                <h3>Top 5 E-Commerce Trends in Pakistan for 2023</h3>
+                                <p>Discover the emerging trends that are shaping Pakistan's e-commerce landscape and how you can capitalize on them for your business.</p>
+                                <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                            </div>
+                        </article>
+                        
+                        <article class="blog-card">
+                            <div class="blog-img">
+                                <img src="images/blog2.jpg" alt="Shopify Store">
+                            </div>
+                            <div class="blog-content">
+                                <div class="blog-meta">
+                                    <span><i class="far fa-calendar-alt"></i> Oct 8, 2023</span>
+                                    <span><i class="far fa-comments"></i> 8 Comments</span>
+                                </div>
+                                <h3>How to Set Up a Shopify Store for Pakistani Customers</h3>
+                                <p>Step-by-step guide to creating a Shopify store optimized for Pakistani consumers, including payment gateways and localization tips.</p>
+                                <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                            </div>
+                        </article>
+                        
+                        <article class="blog-card">
+                            <div class="blog-img">
+                                <img src="images/blog3.jpg" alt="Facebook Ads">
+                            </div>
+                            <div class="blog-content">
+                                <div class="blog-meta">
+                                    <span><i class="far fa-calendar-alt"></i> Oct 1, 2023</span>
+                                    <span><i class="far fa-comments"></i> 15 Comments</span>
+                                </div>
+                                <h3>Facebook Ads That Convert: Pakistani Case Studies</h3>
+                                <p>Learn from real Pakistani e-commerce businesses that achieved remarkable ROI with their Facebook ad campaigns.</p>
+                                <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                            </div>
+                        </article>
+                        
+                        <article class="blog-card">
+                            <div class="blog-img">
+                                <img src="images/blog4.jpg" alt="Dropshipping">
+                            </div>
+                            <div class="blog-content">
+                                <div class="blog-meta">
+                                    <span><i class="far fa-calendar-alt"></i> Sep 25, 2023</span>
+                                    <span><i class="far fa-comments"></i> 5 Comments</span>
+                                </div>
+                                <h3>Dropshipping in Pakistan: Complete Guide for Beginners</h3>
+                                <p>Everything you need to know to start a profitable dropshipping business in Pakistan without inventory hassles.</p>
+                                <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                            </div>
+                        </article>
+                        
+                        <article class="blog-card">
+                            <div class="blog-img">
+                                <img src="images/blog5.jpg" alt="SEO Strategies">
+                            </div>
+                            <div class="blog-content">
+                                <div class="blog-meta">
+                                    <span><i class="far fa-calendar-alt"></i> Sep 18, 2023</span>
+                                    <span><i class="far fa-comments"></i> 10 Comments</span>
+                                </div>
+                                <h3>SEO Strategies That Work for Pakistani E-Commerce Sites</h3>
+                                <p>Localized SEO techniques to help your Pakistani e-commerce store rank higher in search results and get more organic traffic.</p>
+                                <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                            </div>
+                        </article>
+                        
+                        <article class="blog-card">
+                            <div class="blog-img">
+                                <img src="images/blog6.jpg" alt="Success Story">
+                            </div>
+                            <div class="blog-content">
+                                <div class="blog-meta">
+                                    <span><i class="far fa-calendar-alt"></i> Sep 10, 2023</span>
+                                    <span><i class="far fa-comments"></i> 22 Comments</span>
+                                </div>
+                                <h3>From Zero to 1M: A Pakistani E-Commerce Success Story</h3>
+                                <p>Inspiring interview with a student who built a million-rupee e-commerce business after taking our course.</p>
+                                <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                            </div>
+                        </article>
+                    </div>
+                    
+                    <div class="pagination">
+                        <a href="#" class="page-link active">1</a>
+                        <a href="#" class="page-link">2</a>
+                        <a href="#" class="page-link">3</a>
+                        <a href="#" class="page-link"><i class="fas fa-chevron-right"></i></a>
+                    </div>
+                </div>
+                
+                <aside class="blog-sidebar">
+                    <div class="sidebar-widget">
+                        <h3 class="sidebar-title">Popular Posts</h3>
+                        <ul class="popular-posts">
+                            <li class="popular-post">
+                                <div class="popular-post-img">
+                                    <img src="images/blog2.jpg" alt="Popular Post">
+                                </div>
+                                <div class="popular-post-content">
+                                    <h4><a href="#">How to Set Up a Shopify Store for Pakistani Customers</a></h4>
+                                    <span>Oct 8, 2023</span>
+                                </div>
+                            </li>
+                            <li class="popular-post">
+                                <div class="popular-post-img">
+                                    <img src="images/blog3.jpg" alt="Popular Post">
+                                </div>
+                                <div class="popular-post-content">
+                                    <h4><a href="#">Facebook Ads That Convert: Pakistani Case Studies</a></h4>
+                                    <span>Oct 1, 2023</span>
+                                </div>
+                            </li>
+                            <li class="popular-post">
+                                <div class="popular-post-img">
+                                    <img src="images/blog6.jpg" alt="Popular Post">
+                                </div>
+                                <div class="popular-post-content">
+                                    <h4><a href="#">From Zero to 1M: A Pakistani E-Commerce Success Story</a></h4>
+                                    <span>Sep 10, 2023</span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="sidebar-widget">
+                        <h3 class="sidebar-title">Categories</h3>
+                        <ul class="sidebar-categories">
+                            <li><a href="#">Dropshipping <span>(12)</span></a></li>
+                            <li><a href="#">Shopify <span>(8)</span></a></li>
+                            <li><a href="#">Marketing <span>(15)</span></a></li>
+                            <li><a href="#">SEO <span>(7)</span></a></li>
+                            <li><a href="#">Success Stories <span>(5)</span></a></li>
+                            <li><a href="#">E-Commerce Tips <span>(10)</span></a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="sidebar-widget">
+                        <h3 class="sidebar-title">Tags</h3>
+                        <div class="tags">
+                            <a href="#" class="tag">Facebook Ads</a>
+                            <a href="#" class="tag">Google Ads</a>
+                            <a href="#" class="tag">WooCommerce</a>
+                            <a href="#" class="tag">Payment Gateways</a>
+                            <a href="#" class="tag">Product Sourcing</a>
+                            <a href="#" class="tag">Customer Service</a>
+                            <a href="#" class="tag">Inventory</a>
+                            <a href="#" class="tag">Pakistani Market</a>
+                        </div>
+                    </div>
+                    
+                    <div class="sidebar-widget">
+                        <h3 class="sidebar-title">Newsletter</h3>
+                        <p>Subscribe to get the latest e-commerce tips straight to your inbox.</p>
+                        <form class="newsletter-form">
+                            <input type="text" placeholder="Your Name">
+                            <input type="email" placeholder="Your Email">
+                            <button type="submit">Subscribe</button>
+                        </form>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3>EcomWithNaveed</h3>
+                    <p>Your gateway to e-commerce success through expert-led online courses and training programs.</p>
+                </div>
+                <div class="footer-col">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="courses.html">Courses</a></li>
+                        <li><a href="classes.html">Online Classes</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Contact Us</h3>
+                    <ul>
+                        <li><i class="fas fa-envelope"></i> info@ecomwithnaveed.com</li>
+                        <li><i class="fas fa-phone"></i> +92 300 1234567</li>
+                        <li><i class="fas fa-map-marker-alt"></i> Lahore, Pakistan</li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Follow Us</h3>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="https://wa.me/923001234567"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 EcomWithNaveed. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
