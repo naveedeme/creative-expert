@@ -3,16 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>E-Commerce Blog - EcomWithNaveed</title>
+    <title>E-Commerce Blog - Learn E-Com With Naveed Ahmed</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
     <style>
         /* Blog Page Specific Styles */
         .blog-hero {
-            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('images/blog-hero.jpg');
-            background-size: cover;
-            background-position: center;
+            background: var(--primary-color);
             color: var(--white);
             text-align: center;
             padding: 120px 0 80px;
@@ -49,7 +47,7 @@
             position: absolute;
             right: 5px;
             top: 5px;
-            background: var(--primary-color);
+            background: var(--dark-color);
             color: white;
             border: none;
             width: 40px;
@@ -77,7 +75,7 @@
         
         .category-btn:hover, 
         .category-btn.active {
-            background: var(--primary-color);
+            background: var(--dark-color);
         }
         
         .blog-grid {
@@ -93,27 +91,12 @@
             overflow: hidden;
             box-shadow: var(--box-shadow);
             transition: var(--transition);
+            border: 1px solid #eee;
         }
         
         .blog-card:hover {
             transform: translateY(-10px);
             box-shadow: 0 15px 30px rgba(0,0,0,0.1);
-        }
-        
-        .blog-img {
-            height: 220px;
-            overflow: hidden;
-        }
-        
-        .blog-img img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: var(--transition);
-        }
-        
-        .blog-card:hover .blog-img img {
-            transform: scale(1.05);
         }
         
         .blog-content {
@@ -132,6 +115,7 @@
             display: flex;
             align-items: center;
             margin-right: 15px;
+            cursor: pointer;
         }
         
         .blog-meta i {
@@ -157,6 +141,7 @@
             color: var(--primary-color);
             font-weight: 500;
             transition: var(--transition);
+            cursor: pointer;
         }
         
         .read-more i {
@@ -178,6 +163,7 @@
             border-radius: 10px;
             box-shadow: var(--box-shadow);
             margin-bottom: 30px;
+            border: 1px solid #eee;
         }
         
         .sidebar-title {
@@ -204,7 +190,6 @@
         }
         
         .popular-post {
-            display: flex;
             margin-bottom: 15px;
             padding-bottom: 15px;
             border-bottom: 1px solid #eee;
@@ -216,25 +201,11 @@
             border-bottom: none;
         }
         
-        .popular-post-img {
-            width: 80px;
-            height: 60px;
-            border-radius: 5px;
-            overflow: hidden;
-            margin-right: 15px;
-            flex-shrink: 0;
-        }
-        
-        .popular-post-img img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        
         .popular-post-content h4 {
             font-size: 0.95rem;
             margin-bottom: 5px;
             line-height: 1.4;
+            cursor: pointer;
         }
         
         .popular-post-content span {
@@ -254,6 +225,7 @@
             border-radius: 50px;
             font-size: 0.85rem;
             transition: var(--transition);
+            cursor: pointer;
         }
         
         .tag:hover {
@@ -316,6 +288,147 @@
             color: var(--white);
         }
         
+        /* Popup Styles */
+        .popup-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.7);
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            overflow-y: auto;
+        }
+        
+        .popup-content {
+            background: white;
+            max-width: 800px;
+            width: 100%;
+            border-radius: 10px;
+            padding: 30px;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+        }
+        
+        .close-popup {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-light);
+        }
+        
+        .popup-content h2 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+        
+        .popup-meta {
+            display: flex;
+            margin-bottom: 20px;
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+        
+        .popup-meta span {
+            margin-right: 20px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .popup-meta i {
+            margin-right: 5px;
+        }
+        
+        .popup-body {
+            line-height: 1.7;
+            margin-bottom: 30px;
+        }
+        
+        .comments-section {
+            margin-top: 40px;
+            border-top: 1px solid #eee;
+            padding-top: 30px;
+        }
+        
+        .comment {
+            margin-bottom: 25px;
+            padding-bottom: 25px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .comment:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+        
+        .comment-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .comment-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--primary-color);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            font-weight: bold;
+        }
+        
+        .comment-author {
+            font-weight: 600;
+        }
+        
+        .comment-date {
+            font-size: 0.8rem;
+            color: var(--text-light);
+            margin-left: 10px;
+        }
+        
+        .comment-text {
+            padding-left: 55px;
+        }
+        
+        .comment-form {
+            margin-top: 40px;
+        }
+        
+        .comment-form h4 {
+            margin-bottom: 20px;
+        }
+        
+        .comment-form textarea {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            min-height: 100px;
+        }
+        
+        .comment-form button {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        
         @media (max-width: 992px) {
             .blog-container {
                 grid-template-columns: 1fr;
@@ -334,6 +447,10 @@
             .blog-grid {
                 grid-template-columns: 1fr;
             }
+            
+            .popup-content {
+                padding: 20px;
+            }
         }
     </style>
 </head>
@@ -341,7 +458,7 @@
     <header>
         <div class="container">
             <div class="logo">
-                <h1>EcomWithNaveed</h1>
+                <h1>Learn E-Com With Naveed</h1>
             </div>
             <nav>
                 <ul>
@@ -353,7 +470,7 @@
                 </ul>
             </nav>
             <div class="cta-button">
-                <a href="https://wa.me/923001234567" class="btn whatsapp-btn">
+                <a href="https://wa.me/923125899189" class="btn whatsapp-btn">
                     <i class="fab fa-whatsapp"></i> Chat Now
                 </a>
             </div>
@@ -384,93 +501,120 @@
             <div class="blog-container">
                 <div class="blog-main">
                     <div class="blog-grid">
-                        <article class="blog-card">
-                            <div class="blog-img">
-                                <img src="images/blog1.jpg" alt="E-commerce Trends">
-                            </div>
+                        <!-- Blog Post 1 -->
+                        <article class="blog-card" data-id="1">
                             <div class="blog-content">
                                 <div class="blog-meta">
-                                    <span><i class="far fa-calendar-alt"></i> Oct 15, 2023</span>
-                                    <span><i class="far fa-comments"></i> 12 Comments</span>
+                                    <span><i class="far fa-calendar-alt"></i> May 15, 2023</span>
+                                    <span class="comment-trigger"><i class="far fa-comments"></i> 8 Comments</span>
                                 </div>
-                                <h3>Top 5 E-Commerce Trends in Pakistan for 2023</h3>
-                                <p>Discover the emerging trends that are shaping Pakistan's e-commerce landscape and how you can capitalize on them for your business.</p>
-                                <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                                <h3>How to Accept Payments in Pakistan: Complete Guide</h3>
+                                <p>Exploring all payment gateway options for Pakistani e-commerce stores including JazzCash, EasyPaisa, Stripe alternatives, and bank transfers.</p>
+                                <span class="read-more">Read More <i class="fas fa-arrow-right"></i></span>
                             </div>
                         </article>
                         
-                        <article class="blog-card">
-                            <div class="blog-img">
-                                <img src="images/blog2.jpg" alt="Shopify Store">
-                            </div>
+                        <!-- Blog Post 2 -->
+                        <article class="blog-card" data-id="2">
                             <div class="blog-content">
                                 <div class="blog-meta">
-                                    <span><i class="far fa-calendar-alt"></i> Oct 8, 2023</span>
-                                    <span><i class="far fa-comments"></i> 8 Comments</span>
+                                    <span><i class="far fa-calendar-alt"></i> Mar 28, 2023</span>
+                                    <span class="comment-trigger"><i class="far fa-comments"></i> 14 Comments</span>
                                 </div>
-                                <h3>How to Set Up a Shopify Store for Pakistani Customers</h3>
-                                <p>Step-by-step guide to creating a Shopify store optimized for Pakistani consumers, including payment gateways and localization tips.</p>
-                                <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                                <h3>Pakistani Dropshipping Suppliers You Can Trust</h3>
+                                <p>Verified list of reliable Pakistani suppliers for dropshipping businesses with competitive prices and quality products.</p>
+                                <span class="read-more">Read More <i class="fas fa-arrow-right"></i></span>
                             </div>
                         </article>
                         
-                        <article class="blog-card">
-                            <div class="blog-img">
-                                <img src="images/blog3.jpg" alt="Facebook Ads">
-                            </div>
+                        <!-- Blog Post 3 -->
+                        <article class="blog-card" data-id="3">
                             <div class="blog-content">
                                 <div class="blog-meta">
-                                    <span><i class="far fa-calendar-alt"></i> Oct 1, 2023</span>
-                                    <span><i class="far fa-comments"></i> 15 Comments</span>
+                                    <span><i class="far fa-calendar-alt"></i> Feb 10, 2023</span>
+                                    <span class="comment-trigger"><i class="far fa-comments"></i> 5 Comments</span>
                                 </div>
-                                <h3>Facebook Ads That Convert: Pakistani Case Studies</h3>
-                                <p>Learn from real Pakistani e-commerce businesses that achieved remarkable ROI with their Facebook ad campaigns.</p>
-                                <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                                <h3>SEO for Pakistani E-Commerce: Local Ranking Factors</h3>
+                                <p>Specific SEO strategies that work for .pk domains and how to optimize for Urdu keywords and local search behavior.</p>
+                                <span class="read-more">Read More <i class="fas fa-arrow-right"></i></span>
                             </div>
                         </article>
                         
-                        <article class="blog-card">
-                            <div class="blog-img">
-                                <img src="images/blog4.jpg" alt="Dropshipping">
-                            </div>
+                        <!-- Blog Post 4 -->
+                        <article class="blog-card" data-id="4">
                             <div class="blog-content">
                                 <div class="blog-meta">
-                                    <span><i class="far fa-calendar-alt"></i> Sep 25, 2023</span>
-                                    <span><i class="far fa-comments"></i> 5 Comments</span>
+                                    <span><i class="far fa-calendar-alt"></i> Nov 22, 2022</span>
+                                    <span class="comment-trigger"><i class="far fa-comments"></i> 11 Comments</span>
                                 </div>
-                                <h3>Dropshipping in Pakistan: Complete Guide for Beginners</h3>
-                                <p>Everything you need to know to start a profitable dropshipping business in Pakistan without inventory hassles.</p>
-                                <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                                <h3>From Rs. 10,000 to Rs. 500,000/month: A Karachi Success Story</h3>
+                                <p>Case study of a home-based e-commerce business in Karachi that scaled using Instagram marketing and WhatsApp sales.</p>
+                                <span class="read-more">Read More <i class="fas fa-arrow-right"></i></span>
                             </div>
                         </article>
                         
-                        <article class="blog-card">
-                            <div class="blog-img">
-                                <img src="images/blog5.jpg" alt="SEO Strategies">
-                            </div>
+                        <!-- Blog Post 5 -->
+                        <article class="blog-card" data-id="5">
                             <div class="blog-content">
                                 <div class="blog-meta">
-                                    <span><i class="far fa-calendar-alt"></i> Sep 18, 2023</span>
-                                    <span><i class="far fa-comments"></i> 10 Comments</span>
+                                    <span><i class="far fa-calendar-alt"></i> Sep 5, 2022</span>
+                                    <span class="comment-trigger"><i class="far fa-comments"></i> 7 Comments</span>
                                 </div>
-                                <h3>SEO Strategies That Work for Pakistani E-Commerce Sites</h3>
-                                <p>Localized SEO techniques to help your Pakistani e-commerce store rank higher in search results and get more organic traffic.</p>
-                                <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                                <h3>Pakistani Products with Global Demand: Export Opportunities</h3>
+                                <p>Analysis of handmade, textile, and food products from Pakistan that have strong international e-commerce potential.</p>
+                                <span class="read-more">Read More <i class="fas fa-arrow-right"></i></span>
                             </div>
                         </article>
                         
-                        <article class="blog-card">
-                            <div class="blog-img">
-                                <img src="images/blog6.jpg" alt="Success Story">
-                            </div>
+                        <!-- Blog Post 6 -->
+                        <article class="blog-card" data-id="6">
                             <div class="blog-content">
                                 <div class="blog-meta">
-                                    <span><i class="far fa-calendar-alt"></i> Sep 10, 2023</span>
-                                    <span><i class="far fa-comments"></i> 22 Comments</span>
+                                    <span><i class="far fa-calendar-alt"></i> Jun 18, 2022</span>
+                                    <span class="comment-trigger"><i class="far fa-comments"></i> 9 Comments</span>
                                 </div>
-                                <h3>From Zero to 1M: A Pakistani E-Commerce Success Story</h3>
-                                <p>Inspiring interview with a student who built a million-rupee e-commerce business after taking our course.</p>
-                                <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                                <h3>E-Commerce Taxes in Pakistan: What You Need to Know</h3>
+                                <p>Clear explanation of FBR regulations, sales tax, and income tax requirements for online sellers in Pakistan.</p>
+                                <span class="read-more">Read More <i class="fas fa-arrow-right"></i></span>
+                            </div>
+                        </article>
+                        
+                        <!-- Blog Post 7 -->
+                        <article class="blog-card" data-id="7">
+                            <div class="blog-content">
+                                <div class="blog-meta">
+                                    <span><i class="far fa-calendar-alt"></i> Apr 2, 2022</span>
+                                    <span class="comment-trigger"><i class="far fa-comments"></i> 6 Comments</span>
+                                </div>
+                                <h3>WhatsApp Marketing for Pakistani Businesses: Complete Guide</h3>
+                                <p>How to use WhatsApp Business API, catalog features, and broadcast lists to drive e-commerce sales in Pakistan.</p>
+                                <span class="read-more">Read More <i class="fas fa-arrow-right"></i></span>
+                            </div>
+                        </article>
+                        
+                        <!-- Blog Post 8 -->
+                        <article class="blog-card" data-id="8">
+                            <div class="blog-content">
+                                <div class="blog-meta">
+                                    <span><i class="far fa-calendar-alt"></i> Jan 15, 2022</span>
+                                    <span class="comment-trigger"><i class="far fa-comments"></i> 12 Comments</span>
+                                </div>
+                                <h3>Pakistani E-Commerce Trends to Watch in 2025</h3>
+                                <p>Predictions about social commerce, BNPL services, and hyperlocal delivery models that will dominate the Pakistani market.</p>
+                                <span class="read-more">Read More <i class="fas fa-arrow-right"></i></span>
+                            </div>
+                        </article>
+                        
+                        <!-- Blog Post 9 -->
+                        <article class="blog-card" data-id="9">
+                            <div class="blog-content">
+                                <div class="blog-meta">
+                                    <span><i class="far fa-calendar-alt"></i> Oct 30, 2021</span>
+                                    <span class="comment-trigger"><i class="far fa-comments"></i> 4 Comments</span>
+                                </div>
+                                <h3>Building an E-Commerce Brand in Pakistan: Step-by-Step</h3>
+                                <p>From product selection to packaging design - how to create a memorable brand that stands out in the Pakistani market.</p>
+                                <span class="read-more">Read More <i class="fas fa-arrow-right"></i></span>
                             </div>
                         </article>
                     </div>
@@ -487,31 +631,22 @@
                     <div class="sidebar-widget">
                         <h3 class="sidebar-title">Popular Posts</h3>
                         <ul class="popular-posts">
-                            <li class="popular-post">
-                                <div class="popular-post-img">
-                                    <img src="images/blog2.jpg" alt="Popular Post">
-                                </div>
+                            <li class="popular-post" data-id="1">
                                 <div class="popular-post-content">
-                                    <h4><a href="#">How to Set Up a Shopify Store for Pakistani Customers</a></h4>
-                                    <span>Oct 8, 2023</span>
+                                    <h4 class="read-more">How to Accept Payments in Pakistan: Complete Guide</h4>
+                                    <span>May 15, 2023</span>
                                 </div>
                             </li>
-                            <li class="popular-post">
-                                <div class="popular-post-img">
-                                    <img src="images/blog3.jpg" alt="Popular Post">
-                                </div>
+                            <li class="popular-post" data-id="4">
                                 <div class="popular-post-content">
-                                    <h4><a href="#">Facebook Ads That Convert: Pakistani Case Studies</a></h4>
-                                    <span>Oct 1, 2023</span>
+                                    <h4 class="read-more">From Rs. 10,000 to Rs. 500,000/month: A Karachi Success Story</h4>
+                                    <span>Nov 22, 2022</span>
                                 </div>
                             </li>
-                            <li class="popular-post">
-                                <div class="popular-post-img">
-                                    <img src="images/blog6.jpg" alt="Popular Post">
-                                </div>
+                            <li class="popular-post" data-id="8">
                                 <div class="popular-post-content">
-                                    <h4><a href="#">From Zero to 1M: A Pakistani E-Commerce Success Story</a></h4>
-                                    <span>Sep 10, 2023</span>
+                                    <h4 class="read-more">Pakistani E-Commerce Trends to Watch in 2025</h4>
+                                    <span>Jan 15, 2022</span>
                                 </div>
                             </li>
                         </ul>
@@ -520,26 +655,26 @@
                     <div class="sidebar-widget">
                         <h3 class="sidebar-title">Categories</h3>
                         <ul class="sidebar-categories">
-                            <li><a href="#">Dropshipping <span>(12)</span></a></li>
-                            <li><a href="#">Shopify <span>(8)</span></a></li>
-                            <li><a href="#">Marketing <span>(15)</span></a></li>
-                            <li><a href="#">SEO <span>(7)</span></a></li>
-                            <li><a href="#">Success Stories <span>(5)</span></a></li>
-                            <li><a href="#">E-Commerce Tips <span>(10)</span></a></li>
+                            <li><a href="#">Payment Solutions <span>(7)</span></a></li>
+                            <li><a href="#">Dropshipping <span>(5)</span></a></li>
+                            <li><a href="#">SEO <span>(4)</span></a></li>
+                            <li><a href="#">Success Stories <span>(9)</span></a></li>
+                            <li><a href="#">Marketing <span>(12)</span></a></li>
+                            <li><a href="#">Legal/Taxes <span>(3)</span></a></li>
                         </ul>
                     </div>
                     
                     <div class="sidebar-widget">
                         <h3 class="sidebar-title">Tags</h3>
                         <div class="tags">
-                            <a href="#" class="tag">Facebook Ads</a>
-                            <a href="#" class="tag">Google Ads</a>
-                            <a href="#" class="tag">WooCommerce</a>
-                            <a href="#" class="tag">Payment Gateways</a>
-                            <a href="#" class="tag">Product Sourcing</a>
-                            <a href="#" class="tag">Customer Service</a>
-                            <a href="#" class="tag">Inventory</a>
-                            <a href="#" class="tag">Pakistani Market</a>
+                            <span class="tag">JazzCash</span>
+                            <span class="tag">EasyPaisa</span>
+                            <span class="tag">Shopify</span>
+                            <span class="tag">WhatsApp</span>
+                            <span class="tag">Instagram</span>
+                            <span class="tag">FBR</span>
+                            <span class="tag">Karachi</span>
+                            <span class="tag">Lahore</span>
                         </div>
                     </div>
                     
@@ -556,6 +691,35 @@
             </div>
         </div>
     </section>
+
+    <!-- Blog Popup -->
+    <div class="popup-overlay" id="blogPopup">
+        <div class="popup-content">
+            <span class="close-popup">&times;</span>
+            <h2 id="popup-title">How to Accept Payments in Pakistan: Complete Guide</h2>
+            <div class="popup-meta">
+                <span><i class="far fa-calendar-alt"></i> May 15, 2023</span>
+                <span><i class="far fa-user"></i> Naveed Ahmed</span>
+                <span class="comment-trigger"><i class="far fa-comments"></i> 8 Comments</span>
+            </div>
+            <div class="popup-body" id="popup-body">
+                <!-- Content will be loaded here -->
+            </div>
+            
+            <!-- Comments Section -->
+            <div class="comments-section" id="comments-section">
+                <h3>Comments</h3>
+                <!-- Comments will be loaded here -->
+            </div>
+            
+            <!-- Comment Form -->
+            <div class="comment-form">
+                <h4>Leave a Comment</h4>
+                <textarea placeholder="Share your thoughts..."></textarea>
+                <button type="submit">Post Comment</button>
+            </div>
+        </div>
+    </div>
 
     <footer>
         <div class="container">
@@ -577,8 +741,8 @@
                 <div class="footer-col">
                     <h3>Contact Us</h3>
                     <ul>
-                        <li><i class="fas fa-envelope"></i> info@ecomwithnaveed.com</li>
-                        <li><i class="fas fa-phone"></i> +92 300 1234567</li>
+                        <li><i class="fas fa-envelope"></i> naveed.intp@gmail.com</li>
+                        <li><i class="fas fa-phone"></i> +92 312 5899189</li>
                         <li><i class="fas fa-map-marker-alt"></i> Lahore, Pakistan</li>
                     </ul>
                 </div>
@@ -589,16 +753,256 @@
                         <a href="#"><i class="fab fa-twitter"></i></a>
                         <a href="#"><i class="fab fa-instagram"></i></a>
                         <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                        <a href="https://wa.me/923001234567"><i class="fab fa-whatsapp"></i></a>
+                        <a href="https://wa.me/923125899189"><i class="fab fa-whatsapp"></i></a>
                     </div>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2023 EcomWithNaveed. All Rights Reserved.</p>
+                <p>&copy; 2023 LearnEcomWithNaveed. All Rights Reserved.</p>
             </div>
         </div>
     </footer>
 
-    <script src="js/script.js"></script>
+    <script>
+        // Blog content data
+        const blogPosts = {
+            1: {
+                title: "How to Accept Payments in Pakistan: Complete Guide",
+                date: "May 15, 2023",
+                author: "Naveed Ahmed",
+                comments: 8,
+                content: `
+                    <p>Accepting payments is one of the biggest challenges Pakistani e-commerce entrepreneurs face. In this comprehensive guide, we'll explore all available options with their pros and cons.</p>
+                    
+                    <h3>1. Mobile Payment Solutions</h3>
+                    <p><strong>JazzCash:</strong> The most popular option with 45% market share. Setup requires a business account with documentation. Transaction fees: 2.9% + Rs. 10.</p>
+                    <p><strong>EasyPaisa:</strong> Telenor's solution with slightly lower fees (2.5% + Rs. 10) but smaller merchant network.</p>
+                    
+                    <h3>2. Bank Payment Gateways</h3>
+                    <p><strong>HBL Pay:</strong> HBL's solution with 3% transaction fee. Requires maintaining an HBL business account.</p>
+                    <p><strong>UBL Omni:</strong> Good for COD reconciliation with 2.75% fees for card payments.</p>
+                    
+                    <h3>3. International Solutions</h3>
+                    <p><strong>Payoneer:</strong> Can receive international payments but has high withdrawal fees (up to $30 per transfer).</p>
+                    <p><strong>Stripe via Third Parties:</strong> Services like PayPro Global allow access to Stripe with 5-7% additional fees.</p>
+                    
+                    <h3>4. Cash on Delivery (COD)</h3>
+                    <p>Still accounts for 65% of Pakistani e-commerce. Key points:</p>
+                    <ul>
+                        <li>Average return rate: 25-35%</li>
+                        <li>Use couriers with COD services (TCS, Leopards, Trax)</li>
+                        <li>Factor in 3-5 days for payment settlement</li>
+                    </ul>
+                    
+                    <p>For most Pakistani stores, we recommend a combination of JazzCash/EasyPaisa for digital payments and COD with a reliable courier partner.</p>
+                `,
+                comments: [
+                    {
+                        author: "Ahmed R.",
+                        date: "May 17, 2023",
+                        text: "Great overview! Would add that Nayapay is emerging as a good alternative with lower fees than JazzCash for micro-transactions."
+                    },
+                    {
+                        author: "Fatima K.",
+                        date: "May 16, 2023",
+                        text: "Very helpful. Do you have any experience with SadaPay for e-commerce? Heard they're launching merchant services soon."
+                    },
+                    {
+                        author: "Bilal S.",
+                        date: "May 16, 2023",
+                        text: "The COD return rates are so accurate! We experience exactly 28% returns on average in Lahore."
+                    },
+                    {
+                        author: "Zainab M.",
+                        date: "May 15, 2023",
+                        text: "Missing info about PayPal alternatives for freelancers. Otherwise excellent guide covering all local options."
+                    }
+                ]
+            },
+            2: {
+                title: "Pakistani Dropshipping Suppliers You Can Trust",
+                date: "Mar 28, 2023",
+                author: "Sana Khan",
+                comments: 14,
+                content: `
+                    <p>After vetting dozens of suppliers, here are our top recommended Pakistani dropshipping partners with proven reliability:</p>
+                    
+                    <h3>1. Textile & Apparel</h3>
+                    <p><strong>FabricXpress (Karachi):</strong> Specializes in premium lawn suits with 3-day nationwide delivery. MOQ: 1 piece.</p>
+                    <p><strong>StitchCraft (Lahore):</strong> Custom embroidered clothing with 5-7 day production time.</p>
+                    
+                    <h3>2. Leather Goods</h3>
+                    <p><strong>PakLeather Direct (Sialkot):</strong> Footballs, gloves, and leather accessories with bulk discounts.</p>
+                    <p><strong>HideCraft (Karachi):</strong> Handmade leather bags and wallets with customization options.</p>
+                    
+                    <h3>3. Handicrafts</h3>
+                    <p><strong>Peshawari Crafts (Peshawar):</strong> Wooden furniture and decor items with worldwide shipping.</p>
+                    <p><strong>Multani Haat (Multan):</strong> Blue pottery and ceramic tableware.</p>
+                    
+                    <h3>4. General Merchandise</h3>
+                    <p><strong>Dropship Pakistan (Islamabad):</strong> 500+ products across categories with API integration.</p>
+                    <p><strong>EZSource (Lahore):</strong> Electronics accessories and home goods with branded packaging.</p>
+                    
+                    <p>Before committing, always order samples and verify:</p>
+                    <ul>
+                        <li>Actual product quality vs photos</li>
+                        <li>Packaging standards</li>
+                        <li>Actual delivery timelines</li>
+                        <li>Responsiveness to issues</li>
+                    </ul>
+                `,
+                comments: [
+                    {
+                        author: "Usman A.",
+                        date: "Apr 5, 2023",
+                        text: "Used FabricXpress based on this recommendation and couldn't be happier! Their lawn quality is better than most physical stores."
+                    },
+                    {
+                        author: "Ayesha T.",
+                        date: "Apr 2, 2023",
+                        text: "Missing any jewelry suppliers? Looking for silver suppliers in Hyderabad area."
+                    },
+                    {
+                        author: "Kamran L.",
+                        date: "Mar 30, 2023",
+                        text: "Dropship Pakistan has terrible customer service in my experience. Orders get mixed up frequently."
+                    },
+                    {
+                        author: "Hira M.",
+                        date: "Mar 29, 2023",
+                        text: "Great list! Can vouch for HideCraft - their leather quality is exceptional for the price."
+                    }
+                ]
+            },
+            // Additional posts would follow the same pattern
+            3: {
+                title: "SEO for Pakistani E-Commerce: Local Ranking Factors",
+                date: "Feb 10, 2023",
+                author: "Ali Raza",
+                comments: 5,
+                content: `
+                    <p>Ranking a Pakistani e-commerce site requires understanding these unique local SEO factors:</p>
+                    
+                    <h3>1. Urdu Keywords Matter</h3>
+                    <p>35% of searches are in Urdu or Roman Urdu. Target terms like "mobile price in Pakistan" alongside "موبائل فون قیمت".</p>
+                    
+                    <h3>2. Local Business Listings</h3>
+                    <p>Ensure listings on:</p>
+                    <ul>
+                        <li>Google My Business (even for online-only stores)</li>
+                        <li>Pakistani business directories like HamariWeb</li>
+                        <li>Location pages for cities you serve</li>
+                    </ul>
+                    
+                    <h3>3. .pk Domain Advantage</h3>
+                    <p>.pk domains rank 23% better for local searches than .com in our tests. Consider using:</p>
+                    <p>yourbrand.pk<br>
+                    shop.yourbrand.pk<br>
+                    store.yourbrand.pk</p>
+                    
+                    <h3>4. Local Backlinks</h3>
+                    <p>Prioritize links from:</p>
+                    <ul>
+                        <li>Pakistani tech blogs</li>
+                        <li>Local news sites</li>
+                        <li>University .edu.pk domains</li>
+                    </ul>
+                    
+                    <h3>5. Page Speed is Critical</h3>
+                    <p>With average Pakistani internet speeds:</p>
+                    <ul>
+                        <li>Aim for sub-2s load times</li>
+                        <li>Use local hosting (Cloudflare's Karachi PoP helps)</li>
+                        <li>Compress images aggressively</li>
+                    </ul>
+                `,
+                comments: [
+                    {
+                        author: "Zubair K.",
+                        date: "Feb 15, 2023",
+                        text: "The Urdu keyword tip is gold! Saw 40% more traffic after implementing this on my auto parts site."
+                    },
+                    {
+                        author: "Sadia N.",
+                        date: "Feb 12, 2023",
+                        text: "Any recommendations for local Pakistani hosting providers with good uptime?"
+                    },
+                    {
+                        author: "Faisal R.",
+                        date: "Feb 11, 2023",
+                        text: "Missing discussion about schema markup for Pakistani e-commerce. Product availability markup helps a lot."
+                    }
+                ]
+            }
+            // Additional posts 4-9 would be here
+        };
+
+        // Popup functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // Read More buttons
+            const readMoreBtns = document.querySelectorAll('.read-more');
+            const popup = document.getElementById('blogPopup');
+            const popupTitle = document.getElementById('popup-title');
+            const popupBody = document.getElementById('popup-body');
+            const popupMeta = document.querySelector('.popup-meta');
+            const commentsSection = document.getElementById('comments-section');
+            const closePopup = document.querySelector('.close-popup');
+            
+            // Comment triggers
+            const commentTriggers = document.querySelectorAll('.comment-trigger');
+            
+            // Open popup for blog content
+            readMoreBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const blogCard = this.closest('[data-id]');
+                    const postId = blogCard ? blogCard.getAttribute('data-id') : this.closest('.popular-post').getAttribute('data-id');
+                    const post = blogPosts[postId];
+                    
+                    popupTitle.textContent = post.title;
+                    popupBody.innerHTML = post.content;
+                    popupMeta.innerHTML = `
+                        <span><i class="far fa-calendar-alt"></i> ${post.date}</span>
+                        <span><i class="far fa-user"></i> ${post.author}</span>
+                        <span class="comment-trigger"><i class="far fa-comments"></i> ${post.comments.length} Comments</span>
+                    `;
+                    
+                    // Load comments
+                    commentsSection.innerHTML = '<h3>Comments</h3>';
+                    post.comments.forEach(comment => {
+                        const firstLetter = comment.author.charAt(0);
+                        commentsSection.innerHTML += `
+                            <div class="comment">
+                                <div class="comment-header">
+                                    <div class="comment-avatar">${firstLetter}</div>
+                                    <div class="comment-author">${comment.author}</div>
+                                    <div class="comment-date">${comment.date}</div>
+                                </div>
+                                <div class="comment-text">
+                                    <p>${comment.text}</p>
+                                </div>
+                            </div>
+                        `;
+                    });
+                    
+                    popup.style.display = 'flex';
+                    document.body.style.overflow = 'hidden';
+                });
+            });
+            
+            // Close popup
+            closePopup.addEventListener('click', function() {
+                popup.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            });
+            
+            // Close when clicking outside content
+            popup.addEventListener('click', function(e) {
+                if(e.target === popup) {
+                    popup.style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                }
+            });
+        });
+    </script>
 </body>
 </html>

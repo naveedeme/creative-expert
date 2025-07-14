@@ -3,16 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Us - EcomWithNaveed</title>
+    <title>About Us - Learn E-Com With Naveed Ahmed</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
     <style>
-        /* Additional About Page Styles */
+        /* About Page Specific Styles */
         .about-hero {
-            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('images/about-hero.jpg');
-            background-size: cover;
-            background-position: center;
+            background: var(--primary-color);
             color: var(--white);
             text-align: center;
             padding: 120px 0 80px;
@@ -49,6 +47,7 @@
             box-shadow: var(--box-shadow);
             text-align: center;
             transition: var(--transition);
+            border: 1px solid #eee;
         }
         
         .mv-card:hover {
@@ -83,16 +82,16 @@
             margin-bottom: 20px;
         }
         
-        .story-image {
+        .story-placeholder {
+            background: var(--primary-color);
+            color: white;
+            height: 300px;
             border-radius: 10px;
-            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
             box-shadow: var(--box-shadow);
-        }
-        
-        .story-image img {
-            width: 100%;
-            height: auto;
-            display: block;
         }
         
         .team-section {
@@ -113,26 +112,21 @@
             overflow: hidden;
             box-shadow: var(--box-shadow);
             transition: var(--transition);
+            border: 1px solid #eee;
         }
         
         .team-card:hover {
             transform: translateY(-10px);
         }
         
-        .team-img {
+        .team-placeholder {
             height: 250px;
-            overflow: hidden;
-        }
-        
-        .team-img img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: var(--transition);
-        }
-        
-        .team-card:hover .team-img img {
-            transform: scale(1.05);
+            background: var(--primary-color);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 5rem;
         }
         
         .team-info {
@@ -161,7 +155,7 @@
             width: 35px;
             height: 35px;
             border-radius: 50%;
-            background-color: rgba(74, 107, 255, 0.1);
+            background: rgba(74, 107, 255, 0.1);
             color: var(--primary-color);
             display: flex;
             align-items: center;
@@ -170,7 +164,7 @@
         }
         
         .team-social a:hover {
-            background-color: var(--primary-color);
+            background: var(--primary-color);
             color: var(--white);
         }
         
@@ -202,7 +196,7 @@
                 grid-template-columns: 1fr;
             }
             
-            .story-image {
+            .story-placeholder {
                 order: -1;
                 max-width: 500px;
                 margin: 0 auto;
@@ -228,7 +222,7 @@
     <header>
         <div class="container">
             <div class="logo">
-                <h1>EcomWithNaveed</h1>
+                <h1>Learn E-Com With Naveed</h1>
             </div>
             <nav>
                 <ul>
@@ -240,7 +234,7 @@
                 </ul>
             </nav>
             <div class="cta-button">
-                <a href="https://wa.me/923001234567" class="btn whatsapp-btn">
+                <a href="https://wa.me/923125899189" class="btn whatsapp-btn">
                     <i class="fab fa-whatsapp"></i> Chat Now
                 </a>
             </div>
@@ -250,7 +244,7 @@
     <section class="about-hero">
         <div class="container">
             <h1>Empowering E-Commerce Entrepreneurs</h1>
-            <p>At EcomWithNaveed, we're committed to helping Pakistani entrepreneurs build successful online businesses through practical training and mentorship.</p>
+            <p>At LearnEcomWithNaveed, we're committed to helping Pakistani entrepreneurs build successful online businesses through practical training and mentorship.</p>
             <a href="classes.html" class="btn primary-btn">Join Our Next Class</a>
         </div>
     </section>
@@ -286,13 +280,13 @@
             <div class="story-content">
                 <div class="story-text">
                     <h2>Our Story</h2>
-                    <p>EcomWithNaveed was founded in 2018 by Naveed Ahmed, a seasoned e-commerce professional who recognized the lack of practical, localized training for Pakistani entrepreneurs.</p>
+                    <p>LearnEcomWithNaveed was founded in 2018 by Naveed Ahmed, a seasoned e-commerce professional who recognized the lack of practical, localized training for Pakistani entrepreneurs.</p>
                     <p>What began as small workshops in Lahore has grown into a comprehensive training platform that has helped over 1,200 students launch and grow their online businesses.</p>
                     <p>Our unique approach combines international best practices with local market knowledge, giving our students a competitive edge in Pakistan's growing e-commerce sector.</p>
                     <p>Today, we're proud to be one of Pakistan's most trusted e-commerce education platforms, with students across the country and even in overseas Pakistani communities.</p>
                 </div>
-                <div class="story-image">
-                    <img src="images/our-story.jpg" alt="EcomWithNaveed Story">
+                <div class="story-placeholder">
+                    <div>Our Journey</div>
                 </div>
             </div>
         </div>
@@ -300,6 +294,7 @@
 
     <section class="stats-section">
         <div class="container">
+            <h2 class="text-center">By The Numbers</h2>
             <div class="stats-grid">
                 <div class="stat-card">
                     <h3>1,200+</h3>
@@ -329,8 +324,8 @@
             </div>
             <div class="team-grid">
                 <div class="team-card">
-                    <div class="team-img">
-                        <img src="images/naveed.jpg" alt="Naveed Ahmed">
+                    <div class="team-placeholder">
+                        NA
                     </div>
                     <div class="team-info">
                         <h3>Naveed Ahmed</h3>
@@ -339,13 +334,13 @@
                         <div class="team-social">
                             <a href="#"><i class="fab fa-linkedin-in"></i></a>
                             <a href="#"><i class="fab fa-twitter"></i></a>
-                            <a href="https://wa.me/923001234567"><i class="fab fa-whatsapp"></i></a>
+                            <a href="https://wa.me/923125899189"><i class="fab fa-whatsapp"></i></a>
                         </div>
                     </div>
                 </div>
                 <div class="team-card">
-                    <div class="team-img">
-                        <img src="images/sana.jpg" alt="Sana Khan">
+                    <div class="team-placeholder">
+                        SK
                     </div>
                     <div class="team-info">
                         <h3>Sana Khan</h3>
@@ -359,8 +354,8 @@
                     </div>
                 </div>
                 <div class="team-card">
-                    <div class="team-img">
-                        <img src="images/ali.jpg" alt="Ali Raza">
+                    <div class="team-placeholder">
+                        AR
                     </div>
                     <div class="team-info">
                         <h3>Ali Raza</h3>
@@ -374,8 +369,8 @@
                     </div>
                 </div>
                 <div class="team-card">
-                    <div class="team-img">
-                        <img src="images/fatima.jpg" alt="Fatima Malik">
+                    <div class="team-placeholder">
+                        FM
                     </div>
                     <div class="team-info">
                         <h3>Fatima Malik</h3>
@@ -398,7 +393,7 @@
             <p>Join our community of successful entrepreneurs and transform your business ideas into reality.</p>
             <div class="cta-buttons">
                 <a href="classes.html" class="btn primary-btn">View Class Schedule</a>
-                <a href="https://wa.me/923001234567" class="btn whatsapp-btn">
+                <a href="https://wa.me/923125899189" class="btn whatsapp-btn">
                     <i class="fab fa-whatsapp"></i> Chat With Us
                 </a>
             </div>
@@ -409,7 +404,7 @@
         <div class="container">
             <div class="footer-grid">
                 <div class="footer-col">
-                    <h3>EcomWithNaveed</h3>
+                    <h3>Learn E-Com With Naveed</h3>
                     <p>Your gateway to e-commerce success through expert-led online courses and training programs.</p>
                 </div>
                 <div class="footer-col">
@@ -425,9 +420,9 @@
                 <div class="footer-col">
                     <h3>Contact Us</h3>
                     <ul>
-                        <li><i class="fas fa-envelope"></i> info@ecomwithnaveed.com</li>
-                        <li><i class="fas fa-phone"></i> +92 300 1234567</li>
-                        <li><i class="fas fa-map-marker-alt"></i> Lahore, Pakistan</li>
+                        <li><i class="fas fa-envelope"></i> naveed.intp@gmail.com</li>
+                        <li><i class="fas fa-phone"></i> +92 312 5899189</li>
+                        <li><i class="fas fa-map-marker-alt"></i> Islamabad, Pakistan</li>
                     </ul>
                 </div>
                 <div class="footer-col">
@@ -437,12 +432,12 @@
                         <a href="#"><i class="fab fa-twitter"></i></a>
                         <a href="#"><i class="fab fa-instagram"></i></a>
                         <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                        <a href="https://wa.me/923001234567"><i class="fab fa-whatsapp"></i></a>
+                        <a href="https://wa.me/923125899189"><i class="fab fa-whatsapp"></i></a>
                     </div>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2023 EcomWithNaveed. All Rights Reserved.</p>
+                <p>&copy; 2023 LearnEcomWithNaveed. All Rights Reserved.</p>
             </div>
         </div>
     </footer>
