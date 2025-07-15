@@ -6,7 +6,554 @@
     <title>Online Classes - Xtreme Commerce</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* CSS Variables */
+        :root {
+            --primary-color: #4a6bff;
+            --secondary-color: #ff6b6b;
+            --dark-color: #2c3e50;
+            --light-color: #f8f9fa;
+            --white: #fff;
+            --black: #000;
+            --text-light: #6c757d;
+            --box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--dark-color);
+            background-color: var(--light-color);
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            padding: 0 15px;
+            margin: 0 auto;
+        }
+
+        a {
+            text-decoration: none;
+            color: var(--primary-color);
+            transition: var(--transition);
+        }
+
+        a:hover {
+            color: var(--secondary-color);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-weight: 500;
+            transition: var(--transition);
+            text-align: center;
+        }
+
+        .btn.primary-btn {
+            background-color: var(--primary-color);
+            color: var(--white);
+            border: 2px solid var(--primary-color);
+        }
+
+        .btn.primary-btn:hover {
+            background-color: transparent;
+            color: var(--primary-color);
+        }
+
+        .btn.secondary-btn {
+            background-color: transparent;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+        }
+
+        .btn.secondary-btn:hover {
+            background-color: var(--primary-color);
+            color: var(--white);
+        }
+
+        .btn.whatsapp-btn {
+            background-color: #25D366;
+            color: var(--white);
+            border: 2px solid #25D366;
+        }
+
+        .btn.whatsapp-btn:hover {
+            background-color: transparent;
+            color: #25D366;
+        }
+
+        section {
+            padding: 60px 0;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            margin-bottom: 20px;
+            font-weight: 600;
+            line-height: 1.2;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: var(--white);
+            box-shadow: var(--box-shadow);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            padding: 15px 0;
+        }
+
+        header .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo h1 {
+            color: var(--primary-color);
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        /* Mobile Menu */
+        .menu-toggle {
+            display: block;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--dark-color);
+            background: none;
+            border: none;
+        }
+
+        nav {
+            width: 100%;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        nav.active {
+            max-height: 500px;
+            padding: 15px 0;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+        }
+
+        nav ul li {
+            margin: 10px 0;
+        }
+
+        nav ul li a {
+            color: var(--dark-color);
+            font-weight: 500;
+            padding: 5px 0;
+            display: block;
+        }
+
+        nav ul li a.active,
+        nav ul li a:hover {
+            color: var(--primary-color);
+        }
+
+        .cta-button {
+            display: none;
+        }
+
+        /* Page Header */
+        .page-header {
+            text-align: center;
+            padding: 100px 0 60px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            margin-top: 70px;
+        }
+
+        .page-header h1 {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+        }
+
+        .page-header p {
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin: 0 auto;
+            color: var(--dark-color);
+        }
+
+        /* Free Course Banner */
+        .free-course-banner {
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 30px 0;
+            text-align: center;
+        }
+
+        .free-course-banner h2 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .free-course-banner p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        /* Class Timer Section */
+        .class-timer {
+            background-color: var(--white);
+            padding: 40px 0;
+        }
+
+        .timer-box {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #3a56d6 100%);
+            border-radius: 10px;
+            padding: 30px;
+            text-align: center;
+            color: var(--white);
+            box-shadow: var(--box-shadow);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .timer-box h2 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+        }
+
+        .timer {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin: 30px 0;
+        }
+
+        .timer-segment {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .time {
+            font-size: 3rem;
+            font-weight: 700;
+            line-height: 1;
+        }
+
+        .label {
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.8;
+        }
+
+        .seats-info {
+            margin: 20px 0;
+            font-size: 1.1rem;
+        }
+
+        .seats-info i {
+            margin-right: 8px;
+        }
+
+        .join-btn {
+            display: inline-block;
+            padding: 15px 30px;
+            font-size: 1.1rem;
+            margin-top: 15px;
+            width: 100%;
+            max-width: 300px;
+        }
+
+        /* Class Details */
+        .class-details {
+            padding: 60px 0;
+        }
+
+        .class-info {
+            background-color: var(--white);
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: var(--box-shadow);
+            margin-bottom: 40px;
+        }
+
+        .class-info h2 {
+            color: var(--primary-color);
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+        }
+
+        .class-meta {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .class-meta p {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .class-meta i {
+            color: var(--primary-color);
+            font-size: 1.2rem;
+            width: 20px;
+        }
+
+        .class-description h3 {
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+        }
+
+        .class-description ul {
+            list-style: none;
+        }
+
+        .class-description li {
+            margin-bottom: 10px;
+            padding-left: 30px;
+            position: relative;
+        }
+
+        .class-description li:before {
+            content: '\f00c';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            color: var(--primary-color);
+            position: absolute;
+            left: 0;
+        }
+
+        .class-instructor h3 {
+            font-size: 1.4rem;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+        }
+
+        .instructor-card {
+            display: flex;
+            flex-direction: column;
+            background-color: var(--white);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+        }
+
+        .instructor-card img {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+        }
+
+        .instructor-info {
+            padding: 25px;
+        }
+
+        .instructor-info h4 {
+            font-size: 1.4rem;
+            margin-bottom: 5px;
+        }
+
+        .title {
+            color: var(--primary-color);
+            font-weight: 500;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        /* Disclaimer Section */
+        .disclaimer-section {
+            padding-bottom: 60px;
+        }
+
+        .disclaimer-box {
+            background-color: #fff8e1;
+            border-left: 5px solid #ffc107;
+            padding: 25px;
+            border-radius: 5px;
+        }
+
+        .disclaimer-box h3 {
+            color: #ff9800;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .disclaimer-box p {
+            margin-bottom: 15px;
+        }
+
+        /* Footer Styles */
+        footer {
+            background-color: var(--dark-color);
+            color: var(--white);
+            padding: 40px 0 0;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .footer-col h3 {
+            color: var(--white);
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+        }
+
+        .footer-col p {
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 15px;
+        }
+
+        .footer-col ul {
+            list-style: none;
+            margin-bottom: 20px;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-col ul li i {
+            margin-right: 10px;
+            color: var(--primary-color);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: var(--white);
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            background-color: var(--primary-color);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding: 20px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.9rem;
+        }
+
+        /* Tablet Styles */
+        @media (min-width: 768px) {
+            .menu-toggle {
+                display: none;
+            }
+
+            nav {
+                width: auto;
+                max-height: none;
+                padding: 0;
+            }
+
+            nav ul {
+                flex-direction: row;
+            }
+
+            nav ul li {
+                margin-left: 20px;
+            }
+
+            .cta-button {
+                display: block;
+            }
+
+            .page-header {
+                padding: 120px 0 80px;
+                margin-top: 0;
+            }
+
+            .page-header h1 {
+                font-size: 3rem;
+            }
+
+            .free-course-banner h2 {
+                font-size: 2.5rem;
+            }
+
+            .free-course-banner p {
+                font-size: 1.5rem;
+            }
+
+            .class-meta {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .instructor-card {
+                flex-direction: row;
+            }
+
+            .instructor-card img {
+                width: 200px;
+                height: 200px;
+            }
+
+            .footer-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* Desktop Styles */
+        @media (min-width: 992px) {
+            .logo h1 {
+                font-size: 1.8rem;
+            }
+
+            .page-header h1 {
+                font-size: 3.5rem;
+            }
+
+            .free-course-banner h2 {
+                font-size: 3rem;
+            }
+
+            .footer-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -14,6 +561,11 @@
             <div class="logo">
                 <h1>Xtreme Commerce</h1>
             </div>
+            
+            <button class="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </button>
+            
             <nav>
                 <ul>
                     <li><a href="index.html">Home</a></li>
@@ -23,6 +575,7 @@
                     <li><a href="classes.html" class="active">Online Classes</a></li>
                 </ul>
             </nav>
+            
             <div class="cta-button">
                 <a href="https://chat.whatsapp.com/Lv5V4bSeDvwA9PJ7Boq9VS" class="btn whatsapp-btn">
                     <i class="fab fa-whatsapp"></i> Join Now
@@ -35,6 +588,13 @@
         <div class="container">
             <h1>Online Classes</h1>
             <p>Join our live interactive sessions and learn e-commerce from experts</p>
+        </div>
+    </section>
+
+    <section class="free-course-banner">
+        <div class="container">
+            <h2>Earn 300k+ in a Month with this Free Course</h2>
+            <p>Limited time offer - Join now and transform your e-commerce business!</p>
         </div>
     </section>
 
@@ -85,7 +645,6 @@
             <div class="class-instructor">
                 <h3>Your Instructor</h3>
                 <div class="instructor-card">
-                    <img src="images/naveed.png" alt="Instructor Naveed">
                     <div class="instructor-info">
                         <h4>Naveed Ahmed</h4>
                         <p class="title">E-Commerce Expert</p>
@@ -148,8 +707,12 @@
         </div>
     </footer>
 
-    <script src="js/script.js"></script>
     <script>
+        // Mobile Menu Toggle
+        document.querySelector('.menu-toggle').addEventListener('click', function() {
+            document.querySelector('nav').classList.toggle('active');
+        });
+
         // Countdown timer for 5 minutes
         function startCountdown() {
             let minutes = 5;

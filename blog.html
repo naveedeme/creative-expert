@@ -6,41 +6,216 @@
     <title>E-Commerce Blog - Xtreme Commerce</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css">
     <style>
+        /* CSS Variables */
+        :root {
+            --primary-color: #4a6bff;
+            --secondary-color: #ff6b6b;
+            --dark-color: #2c3e50;
+            --light-color: #f8f9fa;
+            --white: #fff;
+            --black: #000;
+            --text-light: #6c757d;
+            --box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--dark-color);
+            background-color: var(--light-color);
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            padding: 0 15px;
+            margin: 0 auto;
+        }
+
+        a {
+            text-decoration: none;
+            color: var(--primary-color);
+            transition: var(--transition);
+        }
+
+        a:hover {
+            color: var(--secondary-color);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-weight: 500;
+            transition: var(--transition);
+            text-align: center;
+        }
+
+        .btn.primary-btn {
+            background-color: var(--primary-color);
+            color: var(--white);
+            border: 2px solid var(--primary-color);
+        }
+
+        .btn.primary-btn:hover {
+            background-color: transparent;
+            color: var(--primary-color);
+        }
+
+        .btn.secondary-btn {
+            background-color: transparent;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+        }
+
+        .btn.secondary-btn:hover {
+            background-color: var(--primary-color);
+            color: var(--white);
+        }
+
+        .btn.whatsapp-btn {
+            background-color: #25D366;
+            color: var(--white);
+            border: 2px solid #25D366;
+        }
+
+        .btn.whatsapp-btn:hover {
+            background-color: transparent;
+            color: #25D366;
+        }
+
+        section {
+            padding: 60px 0;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            margin-bottom: 20px;
+            font-weight: 600;
+            line-height: 1.2;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: var(--white);
+            box-shadow: var(--box-shadow);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            padding: 15px 0;
+        }
+
+        header .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo h1 {
+            color: var(--primary-color);
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        /* Mobile Menu */
+        .menu-toggle {
+            display: block;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--dark-color);
+            background: none;
+            border: none;
+        }
+
+        nav {
+            width: 100%;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        nav.active {
+            max-height: 500px;
+            padding: 15px 0;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+        }
+
+        nav ul li {
+            margin: 10px 0;
+        }
+
+        nav ul li a {
+            color: var(--dark-color);
+            font-weight: 500;
+            padding: 5px 0;
+            display: block;
+        }
+
+        nav ul li a.active,
+        nav ul li a:hover {
+            color: var(--primary-color);
+        }
+
+        .cta-button {
+            display: none;
+        }
+
         /* Blog Page Specific Styles */
         .blog-hero {
-            background: var(--primary-color);
+            background: linear-gradient(135deg, var(--primary-color) 0%, #3a56d6 100%);
             color: var(--white);
             text-align: center;
-            padding: 120px 0 80px;
+            padding: 100px 0 60px;
+            margin-top: 70px;
         }
         
         .blog-hero h1 {
-            font-size: 3rem;
-            margin-bottom: 20px;
+            font-size: 2rem;
+            margin-bottom: 15px;
         }
         
         .blog-hero p {
-            max-width: 700px;
-            margin: 0 auto 30px;
-            font-size: 1.1rem;
+            max-width: 90%;
+            margin: 0 auto 25px;
+            font-size: 1rem;
             opacity: 0.9;
         }
         
         .blog-search {
-            max-width: 600px;
+            max-width: 90%;
             margin: 0 auto;
             position: relative;
         }
         
         .blog-search input {
             width: 100%;
-            padding: 15px 20px;
+            padding: 12px 20px;
             border-radius: 50px;
             border: none;
             font-size: 1rem;
             padding-right: 50px;
+            box-shadow: var(--box-shadow);
         }
         
         .blog-search button {
@@ -54,35 +229,47 @@
             height: 40px;
             border-radius: 50%;
             cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .blog-search button:hover {
+            background: var(--secondary-color);
         }
         
         .blog-categories {
             display: flex;
             justify-content: center;
             flex-wrap: wrap;
-            gap: 15px;
-            margin: 40px 0;
+            gap: 10px;
+            margin: 30px 0;
+            padding: 0 15px;
         }
         
         .category-btn {
-            padding: 8px 20px;
+            padding: 6px 15px;
             background: rgba(255,255,255,0.1);
             color: var(--white);
             border-radius: 50px;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             transition: var(--transition);
+            border: 1px solid rgba(255,255,255,0.2);
         }
         
         .category-btn:hover, 
         .category-btn.active {
             background: var(--dark-color);
+            transform: translateY(-2px);
+        }
+        
+        .blog-section {
+            padding: 40px 0;
         }
         
         .blog-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 30px;
-            margin: 50px 0;
+            grid-template-columns: 1fr;
+            gap: 25px;
+            margin: 30px 0;
         }
         
         .blog-card {
@@ -91,48 +278,49 @@
             overflow: hidden;
             box-shadow: var(--box-shadow);
             transition: var(--transition);
-            border: 1px solid #eee;
+            border: 1px solid rgba(0,0,0,0.05);
         }
         
         .blog-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
         }
         
         .blog-content {
-            padding: 25px;
+            padding: 20px;
         }
         
         .blog-meta {
             display: flex;
             align-items: center;
-            margin-bottom: 15px;
-            font-size: 0.85rem;
+            margin-bottom: 12px;
+            font-size: 0.8rem;
             color: var(--text-light);
+            flex-wrap: wrap;
+            gap: 10px;
         }
         
         .blog-meta span {
             display: flex;
             align-items: center;
-            margin-right: 15px;
-            cursor: pointer;
         }
         
         .blog-meta i {
             margin-right: 5px;
-            font-size: 0.9rem;
+            font-size: 0.8rem;
         }
         
         .blog-content h3 {
-            font-size: 1.3rem;
-            margin-bottom: 15px;
+            font-size: 1.2rem;
+            margin-bottom: 12px;
             line-height: 1.4;
         }
         
         .blog-content p {
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             color: var(--text-light);
-            font-size: 0.95rem;
+            font-size: 0.9rem;
+            line-height: 1.6;
         }
         
         .read-more {
@@ -140,17 +328,18 @@
             align-items: center;
             color: var(--primary-color);
             font-weight: 500;
+            font-size: 0.9rem;
             transition: var(--transition);
-            cursor: pointer;
         }
         
         .read-more i {
             margin-left: 5px;
+            font-size: 0.8rem;
             transition: var(--transition);
         }
         
         .read-more:hover {
-            color: var(--dark-color);
+            color: var(--secondary-color);
         }
         
         .read-more:hover i {
@@ -159,16 +348,16 @@
         
         .blog-sidebar {
             background: var(--white);
-            padding: 30px;
+            padding: 25px;
             border-radius: 10px;
             box-shadow: var(--box-shadow);
-            margin-bottom: 30px;
-            border: 1px solid #eee;
+            margin: 40px 0 30px;
+            border: 1px solid rgba(0,0,0,0.05);
         }
         
         .sidebar-title {
-            font-size: 1.2rem;
-            margin-bottom: 20px;
+            font-size: 1.1rem;
+            margin-bottom: 15px;
             padding-bottom: 10px;
             border-bottom: 2px solid #eee;
             position: relative;
@@ -202,90 +391,123 @@
         }
         
         .popular-post-content h4 {
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             margin-bottom: 5px;
             line-height: 1.4;
-            cursor: pointer;
         }
         
         .popular-post-content span {
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             color: var(--text-light);
+        }
+        
+        .sidebar-categories {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .sidebar-categories li {
+            margin-bottom: 10px;
+        }
+        
+        .sidebar-categories a {
+            display: flex;
+            justify-content: space-between;
+            color: var(--dark-color);
+            transition: var(--transition);
+            padding: 5px 0;
+        }
+        
+        .sidebar-categories a:hover {
+            color: var(--primary-color);
+            padding-left: 5px;
+        }
+        
+        .sidebar-categories span {
+            background: var(--light-color);
+            padding: 2px 8px;
+            border-radius: 50px;
+            font-size: 0.7rem;
         }
         
         .tags {
             display: flex;
             flex-wrap: wrap;
-            gap: 10px;
+            gap: 8px;
         }
         
         .tag {
-            padding: 5px 15px;
+            padding: 4px 12px;
             background: #f5f5f5;
             border-radius: 50px;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             transition: var(--transition);
-            cursor: pointer;
         }
         
         .tag:hover {
             background: var(--primary-color);
             color: var(--white);
+            transform: translateY(-2px);
         }
         
         .newsletter-form input {
             width: 100%;
-            padding: 12px 15px;
+            padding: 10px 15px;
             border: 1px solid #ddd;
             border-radius: 5px;
-            margin-bottom: 15px;
-            font-size: 0.9rem;
+            margin-bottom: 12px;
+            font-size: 0.85rem;
+            transition: var(--transition);
+        }
+        
+        .newsletter-form input:focus {
+            border-color: var(--primary-color);
+            outline: none;
         }
         
         .newsletter-form button {
             width: 100%;
-            padding: 12px;
+            padding: 10px;
             background: var(--primary-color);
             color: var(--white);
             border: none;
             border-radius: 5px;
             cursor: pointer;
             transition: var(--transition);
+            font-weight: 500;
         }
         
         .newsletter-form button:hover {
             background: var(--dark-color);
         }
         
-        .blog-container {
-            display: grid;
-            grid-template-columns: 1fr 300px;
-            gap: 40px;
-        }
-        
         .pagination {
             display: flex;
             justify-content: center;
-            margin-top: 50px;
+            margin-top: 40px;
+            flex-wrap: wrap;
+            gap: 5px;
         }
         
         .page-link {
-            width: 40px;
-            height: 40px;
+            width: 36px;
+            height: 36px;
             display: flex;
             align-items: center;
             justify-content: center;
             border-radius: 5px;
-            margin: 0 5px;
             background: var(--white);
             color: var(--dark-color);
             transition: var(--transition);
+            font-size: 0.9rem;
+            box-shadow: var(--box-shadow);
         }
         
         .page-link:hover,
         .page-link.active {
             background: var(--primary-color);
             color: var(--white);
+            transform: translateY(-2px);
         }
         
         /* Popup Styles */
@@ -297,23 +519,24 @@
             bottom: 0;
             background: rgba(0,0,0,0.7);
             backdrop-filter: blur(5px);
-            z-index: 1000;
+            z-index: 2000;
             display: none;
             align-items: center;
             justify-content: center;
-            padding: 20px;
+            padding: 15px;
             overflow-y: auto;
         }
         
         .popup-content {
             background: white;
-            max-width: 800px;
+            max-width: 100%;
             width: 100%;
             border-radius: 10px;
-            padding: 30px;
+            padding: 25px;
             max-height: 90vh;
             overflow-y: auto;
             position: relative;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
         }
         
         .close-popup {
@@ -323,22 +546,37 @@
             font-size: 1.5rem;
             cursor: pointer;
             color: var(--text-light);
+            transition: var(--transition);
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+        
+        .close-popup:hover {
+            background: #f5f5f5;
+            color: var(--secondary-color);
         }
         
         .popup-content h2 {
             color: var(--primary-color);
-            margin-bottom: 20px;
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+            padding-right: 30px;
         }
         
         .popup-meta {
             display: flex;
             margin-bottom: 20px;
             color: var(--text-light);
-            font-size: 0.9rem;
+            font-size: 0.85rem;
+            flex-wrap: wrap;
+            gap: 15px;
         }
         
         .popup-meta span {
-            margin-right: 20px;
             display: flex;
             align-items: center;
         }
@@ -349,18 +587,44 @@
         
         .popup-body {
             line-height: 1.7;
-            margin-bottom: 30px;
+            margin-bottom: 25px;
+        }
+        
+        .popup-body p {
+            margin-bottom: 15px;
+            font-size: 0.95rem;
+        }
+        
+        .popup-body h3 {
+            font-size: 1.2rem;
+            margin: 25px 0 15px;
+            color: var(--dark-color);
+        }
+        
+        .popup-body ul {
+            margin-bottom: 20px;
+            padding-left: 20px;
+        }
+        
+        .popup-body li {
+            margin-bottom: 8px;
         }
         
         .comments-section {
-            margin-top: 40px;
+            margin-top: 30px;
             border-top: 1px solid #eee;
-            padding-top: 30px;
+            padding-top: 25px;
+        }
+        
+        .comments-section h3 {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            color: var(--dark-color);
         }
         
         .comment {
-            margin-bottom: 25px;
-            padding-bottom: 25px;
+            margin-bottom: 20px;
+            padding-bottom: 20px;
             border-bottom: 1px solid #eee;
         }
         
@@ -374,50 +638,63 @@
             display: flex;
             align-items: center;
             margin-bottom: 10px;
+            flex-wrap: wrap;
+            gap: 10px;
         }
         
         .comment-avatar {
-            width: 40px;
-            height: 40px;
+            width: 36px;
+            height: 36px;
             border-radius: 50%;
             background: var(--primary-color);
             color: white;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-right: 15px;
+            margin-right: 10px;
             font-weight: bold;
+            flex-shrink: 0;
         }
         
         .comment-author {
             font-weight: 600;
+            font-size: 0.95rem;
         }
         
         .comment-date {
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             color: var(--text-light);
-            margin-left: 10px;
         }
         
         .comment-text {
-            padding-left: 55px;
+            padding-left: 46px;
+            font-size: 0.9rem;
         }
         
         .comment-form {
-            margin-top: 40px;
+            margin-top: 30px;
         }
         
         .comment-form h4 {
-            margin-bottom: 20px;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
         }
         
         .comment-form textarea {
             width: 100%;
-            padding: 15px;
+            padding: 12px;
             border: 1px solid #ddd;
             border-radius: 5px;
             margin-bottom: 15px;
-            min-height: 100px;
+            min-height: 120px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.9rem;
+            transition: var(--transition);
+        }
+        
+        .comment-form textarea:focus {
+            border-color: var(--primary-color);
+            outline: none;
         }
         
         .comment-form button {
@@ -427,29 +704,179 @@
             padding: 10px 20px;
             border-radius: 5px;
             cursor: pointer;
+            transition: var(--transition);
+            font-weight: 500;
         }
         
-        @media (max-width: 992px) {
-            .blog-container {
-                grid-template-columns: 1fr;
+        .comment-form button:hover {
+            background: var(--dark-color);
+        }
+        
+        /* Footer Styles */
+        footer {
+            background-color: var(--dark-color);
+            color: var(--white);
+            padding: 40px 0 0;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .footer-col h3 {
+            color: var(--white);
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+        }
+
+        .footer-col p {
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 15px;
+        }
+
+        .footer-col ul {
+            list-style: none;
+            margin-bottom: 20px;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-col ul li i {
+            margin-right: 10px;
+            color: var(--primary-color);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: var(--white);
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            background-color: var(--primary-color);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding: 20px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.9rem;
+        }
+        
+        /* Tablet Styles */
+        @media (min-width: 768px) {
+            .menu-toggle {
+                display: none;
+            }
+
+            nav {
+                width: auto;
+                max-height: none;
+                padding: 0;
+            }
+
+            nav ul {
+                flex-direction: row;
+            }
+
+            nav ul li {
+                margin-left: 20px;
+            }
+
+            .cta-button {
+                display: block;
             }
             
-            .blog-sidebar {
-                margin-top: 50px;
+            .blog-hero {
+                padding: 120px 0 80px;
+                margin-top: 0;
             }
-        }
-        
-        @media (max-width: 768px) {
+            
             .blog-hero h1 {
                 font-size: 2.5rem;
             }
             
+            .blog-hero p {
+                font-size: 1.1rem;
+                max-width: 700px;
+            }
+            
+            .blog-search {
+                max-width: 600px;
+            }
+            
+            .blog-categories {
+                gap: 15px;
+                margin: 40px 0;
+            }
+            
+            .category-btn {
+                padding: 8px 20px;
+                font-size: 0.9rem;
+            }
+            
             .blog-grid {
-                grid-template-columns: 1fr;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 30px;
+            }
+            
+            .blog-container {
+                display: grid;
+                grid-template-columns: 1fr 300px;
+                gap: 40px;
+            }
+            
+            .blog-sidebar {
+                margin: 0;
+            }
+            
+            .footer-grid {
+                grid-template-columns: repeat(2, 1fr);
             }
             
             .popup-content {
-                padding: 20px;
+                max-width: 700px;
+                padding: 30px;
+            }
+            
+            .popup-content h2 {
+                font-size: 1.8rem;
+            }
+        }
+        
+        /* Desktop Styles */
+        @media (min-width: 992px) {
+            .logo h1 {
+                font-size: 1.8rem;
+            }
+            
+            .blog-hero h1 {
+                font-size: 3rem;
+            }
+            
+            .blog-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            
+            .footer-grid {
+                grid-template-columns: repeat(4, 1fr);
             }
         }
     </style>
@@ -460,6 +887,11 @@
             <div class="logo">
                 <h1>Xtreme Commerce</h1>
             </div>
+            
+            <button class="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </button>
+            
             <nav>
                 <ul>
                     <li><a href="index.html">Home</a></li>
@@ -469,6 +901,7 @@
                     <li><a href="classes.html">Online Classes</a></li>
                 </ul>
             </nav>
+            
             <div class="cta-button">
                 <a href="https://wa.me/923125899189" class="btn whatsapp-btn">
                     <i class="fab fa-whatsapp"></i> Chat Now
@@ -703,13 +1136,74 @@
                 <span class="comment-trigger"><i class="far fa-comments"></i> 8 Comments</span>
             </div>
             <div class="popup-body" id="popup-body">
-                <!-- Content will be loaded here -->
+                <p>Accepting payments is one of the biggest challenges Pakistani e-commerce entrepreneurs face. In this comprehensive guide, we'll explore all available options with their pros and cons.</p>
+                
+                <h3>1. Mobile Payment Solutions</h3>
+                <p><strong>JazzCash:</strong> The most popular option with 45% market share. Setup requires a business account with documentation. Transaction fees: 2.9% + Rs. 10.</p>
+                <p><strong>EasyPaisa:</strong> Telenor's solution with slightly lower fees (2.5% + Rs. 10) but smaller merchant network.</p>
+                
+                <h3>2. Bank Payment Gateways</h3>
+                <p><strong>HBL Pay:</strong> HBL's solution with 3% transaction fee. Requires maintaining an HBL business account.</p>
+                <p><strong>UBL Omni:</strong> Good for COD reconciliation with 2.75% fees for card payments.</p>
+                
+                <h3>3. International Solutions</h3>
+                <p><strong>Payoneer:</strong> Can receive international payments but has high withdrawal fees (up to $30 per transfer).</p>
+                <p><strong>Stripe via Third Parties:</strong> Services like PayPro Global allow access to Stripe with 5-7% additional fees.</p>
+                
+                <h3>4. Cash on Delivery (COD)</h3>
+                <p>Still accounts for 65% of Pakistani e-commerce. Key points:</p>
+                <ul>
+                    <li>Average return rate: 25-35%</li>
+                    <li>Use couriers with COD services (TCS, Leopards, Trax)</li>
+                    <li>Factor in 3-5 days for payment settlement</li>
+                </ul>
+                
+                <p>For most Pakistani stores, we recommend a combination of JazzCash/EasyPaisa for digital payments and COD with a reliable courier partner.</p>
             </div>
             
             <!-- Comments Section -->
             <div class="comments-section" id="comments-section">
                 <h3>Comments</h3>
-                <!-- Comments will be loaded here -->
+                <div class="comment">
+                    <div class="comment-header">
+                        <div class="comment-avatar">A</div>
+                        <div class="comment-author">Ahmed R.</div>
+                        <div class="comment-date">May 17, 2023</div>
+                    </div>
+                    <div class="comment-text">
+                        <p>Great overview! Would add that Nayapay is emerging as a good alternative with lower fees than JazzCash for micro-transactions.</p>
+                    </div>
+                </div>
+                <div class="comment">
+                    <div class="comment-header">
+                        <div class="comment-avatar">F</div>
+                        <div class="comment-author">Fatima K.</div>
+                        <div class="comment-date">May 16, 2023</div>
+                    </div>
+                    <div class="comment-text">
+                        <p>Very helpful. Do you have any experience with SadaPay for e-commerce? Heard they're launching merchant services soon.</p>
+                    </div>
+                </div>
+                <div class="comment">
+                    <div class="comment-header">
+                        <div class="comment-avatar">B</div>
+                        <div class="comment-author">Bilal S.</div>
+                        <div class="comment-date">May 16, 2023</div>
+                    </div>
+                    <div class="comment-text">
+                        <p>The COD return rates are so accurate! We experience exactly 28% returns on average in Lahore.</p>
+                    </div>
+                </div>
+                <div class="comment">
+                    <div class="comment-header">
+                        <div class="comment-avatar">Z</div>
+                        <div class="comment-author">Zainab M.</div>
+                        <div class="comment-date">May 15, 2023</div>
+                    </div>
+                    <div class="comment-text">
+                        <p>Missing info about PayPal alternatives for freelancers. Otherwise excellent guide covering all local options.</p>
+                    </div>
+                </div>
             </div>
             
             <!-- Comment Form -->
@@ -743,7 +1237,7 @@
                     <ul>
                         <li><i class="fas fa-envelope"></i> ecommguruu@gmail.com</li>
                         <li><i class="fas fa-phone"></i> +92 312 5899189</li>
-                        <li><i class="fas fa-map-marker-alt"></i> Lahore, Pakistan</li>
+                        <li><i class="fas fa-map-marker-alt"></i> Islamabad, Pakistan</li>
                     </ul>
                 </div>
                 <div class="footer-col">
@@ -764,6 +1258,11 @@
     </footer>
 
     <script>
+        // Mobile Menu Toggle
+        document.querySelector('.menu-toggle').addEventListener('click', function() {
+            document.querySelector('nav').classList.toggle('active');
+        });
+
         // Blog content data
         const blogPosts = {
             1: {
@@ -874,7 +1373,6 @@
                     }
                 ]
             },
-            // Additional posts would follow the same pattern
             3: {
                 title: "SEO for Pakistani E-Commerce: Local Ranking Factors",
                 date: "Feb 10, 2024",
@@ -934,12 +1432,10 @@
                     }
                 ]
             }
-            // Additional posts 4-9 would be here
         };
 
-        // Popup functionality
+        // Blog Popup Functionality
         document.addEventListener('DOMContentLoaded', function() {
-            // Read More buttons
             const readMoreBtns = document.querySelectorAll('.read-more');
             const popup = document.getElementById('blogPopup');
             const popupTitle = document.getElementById('popup-title');
@@ -948,56 +1444,61 @@
             const commentsSection = document.getElementById('comments-section');
             const closePopup = document.querySelector('.close-popup');
             
-            // Comment triggers
-            const commentTriggers = document.querySelectorAll('.comment-trigger');
-            
-            // Open popup for blog content
-            readMoreBtns.forEach(btn => {
-                btn.addEventListener('click', function() {
-                    const blogCard = this.closest('[data-id]');
-                    const postId = blogCard ? blogCard.getAttribute('data-id') : this.closest('.popular-post').getAttribute('data-id');
-                    const post = blogPosts[postId];
-                    
-                    popupTitle.textContent = post.title;
-                    popupBody.innerHTML = post.content;
-                    popupMeta.innerHTML = `
-                        <span><i class="far fa-calendar-alt"></i> ${post.date}</span>
-                        <span><i class="far fa-user"></i> ${post.author}</span>
-                        <span class="comment-trigger"><i class="far fa-comments"></i> ${post.comments.length} Comments</span>
-                    `;
-                    
-                    // Load comments
-                    commentsSection.innerHTML = '<h3>Comments</h3>';
-                    post.comments.forEach(comment => {
-                        const firstLetter = comment.author.charAt(0);
-                        commentsSection.innerHTML += `
-                            <div class="comment">
-                                <div class="comment-header">
-                                    <div class="comment-avatar">${firstLetter}</div>
-                                    <div class="comment-author">${comment.author}</div>
-                                    <div class="comment-date">${comment.date}</div>
-                                </div>
-                                <div class="comment-text">
-                                    <p>${comment.text}</p>
-                                </div>
+            function openPopup(postId) {
+                const post = blogPosts[postId];
+                if (!post) return;
+                
+                popupTitle.textContent = post.title;
+                popupBody.innerHTML = post.content;
+                popupMeta.innerHTML = `
+                    <span><i class="far fa-calendar-alt"></i> ${post.date}</span>
+                    <span><i class="far fa-user"></i> ${post.author}</span>
+                    <span><i class="far fa-comments"></i> ${post.comments.length} Comments</span>
+                `;
+                
+                // Load comments
+                let commentsHTML = '<h3>Comments</h3>';
+                post.comments.forEach(comment => {
+                    const firstLetter = comment.author.charAt(0).toUpperCase();
+                    commentsHTML += `
+                        <div class="comment">
+                            <div class="comment-header">
+                                <div class="comment-avatar">${firstLetter}</div>
+                                <div class="comment-author">${comment.author}</div>
+                                <div class="comment-date">${comment.date}</div>
                             </div>
-                        `;
-                    });
-                    
-                    popup.style.display = 'flex';
-                    document.body.style.overflow = 'hidden';
+                            <div class="comment-text">
+                                <p>${comment.text}</p>
+                            </div>
+                        </div>
+                    `;
                 });
+                commentsSection.innerHTML = commentsHTML;
+                
+                popup.style.display = 'flex';
+                document.body.style.overflow = 'hidden';
+            }
+            
+            // Event delegation for better performance
+            document.addEventListener('click', function(e) {
+                // Read More buttons
+                if (e.target.closest('.read-more')) {
+                    const btn = e.target.closest('.read-more');
+                    const blogCard = btn.closest('[data-id]');
+                    const postId = blogCard ? blogCard.getAttribute('data-id') : btn.closest('.popular-post').getAttribute('data-id');
+                    openPopup(postId);
+                }
+                
+                // Close popup
+                if (e.target === closePopup || e.target === popup) {
+                    popup.style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                }
             });
             
-            // Close popup
-            closePopup.addEventListener('click', function() {
-                popup.style.display = 'none';
-                document.body.style.overflow = 'auto';
-            });
-            
-            // Close when clicking outside content
-            popup.addEventListener('click', function(e) {
-                if(e.target === popup) {
+            // Close with Escape key
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && popup.style.display === 'flex') {
                     popup.style.display = 'none';
                     document.body.style.overflow = 'auto';
                 }
@@ -1006,4 +1507,3 @@
     </script>
 </body>
 </html>
-
