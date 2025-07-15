@@ -6,7 +6,451 @@
     <title>Master E-Commerce with Xtreme Commerce</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* CSS Variables */
+        :root {
+            --primary-color: #4a6bff;
+            --secondary-color: #ff6b6b;
+            --dark-color: #2c3e50;
+            --light-color: #f8f9fa;
+            --white: #fff;
+            --black: #000;
+            --box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--dark-color);
+            background-color: var(--light-color);
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            padding: 0 15px;
+            margin: 0 auto;
+        }
+
+        a {
+            text-decoration: none;
+            color: var(--primary-color);
+            transition: var(--transition);
+        }
+
+        a:hover {
+            color: var(--secondary-color);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-weight: 500;
+            transition: var(--transition);
+            text-align: center;
+        }
+
+        .btn.primary-btn {
+            background-color: var(--primary-color);
+            color: var(--white);
+            border: 2px solid var(--primary-color);
+        }
+
+        .btn.primary-btn:hover {
+            background-color: transparent;
+            color: var(--primary-color);
+        }
+
+        .btn.secondary-btn {
+            background-color: transparent;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+        }
+
+        .btn.secondary-btn:hover {
+            background-color: var(--primary-color);
+            color: var(--white);
+        }
+
+        .btn.whatsapp-btn {
+            background-color: #25D366;
+            color: var(--white);
+            border: 2px solid #25D366;
+        }
+
+        .btn.whatsapp-btn:hover {
+            background-color: transparent;
+            color: #25D366;
+        }
+
+        section {
+            padding: 60px 0;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            margin-bottom: 20px;
+            font-weight: 600;
+            line-height: 1.2;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* Hero Image Styles */
+.hero-image {
+    text-align: center;
+    margin: 0 auto;
+    max-width: 100%;
+}
+
+.responsive-hero-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: var(--box-shadow);
+}
+
+/* Adjustments for different screen sizes */
+@media (max-width: 767px) {
+    .hero-image {
+        margin-top: 20px;
+        max-width: 90%;
+    }
+}
+
+@media (min-width: 768px) {
+    .hero-image {
+        flex: 1;
+        padding-left: 30px;
+    }
+    
+    .responsive-hero-image {
+        max-height: 400px;
+        width: auto;
+    }
+}
+
+        /* Header Styles - Mobile First */
+        header {
+            background-color: var(--white);
+            box-shadow: var(--box-shadow);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            padding: 15px 0;
+        }
+
+        header .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo h1 {
+            color: var(--primary-color);
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        /* Mobile Menu */
+        .menu-toggle {
+            display: block;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--dark-color);
+        }
+
+        nav {
+            width: 100%;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        nav.active {
+            max-height: 500px;
+            padding: 15px 0;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+        }
+
+        nav ul li {
+            margin: 10px 0;
+        }
+
+        nav ul li a {
+            color: var(--dark-color);
+            font-weight: 500;
+            padding: 5px 0;
+            display: block;
+        }
+
+        nav ul li a.active,
+        nav ul li a:hover {
+            color: var(--primary-color);
+        }
+
+        .cta-button {
+            display: none; /* Hidden on mobile by default */
+        }
+
+        /* Hero Section */
+        .hero {
+            padding-top: 100px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        }
+
+        .hero .container {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .hero-content {
+            order: 2;
+            padding-top: 30px;
+            text-align: center;
+        }
+
+        .hero-content h1 {
+            font-size: 2rem;
+        }
+
+        .hero-image {
+            order: 1;
+            text-align: center;
+        }
+
+        .hero-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        /* Features Section */
+        .features h2 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+
+        .feature-card {
+            background-color: var(--white);
+            padding: 25px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-card i {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+
+        /* Testimonials Section */
+        .testimonials {
+            background-color: #f8f9fa;
+        }
+
+        .testimonials h2 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .testimonial-slider {
+            background-color: var(--white);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: var(--box-shadow);
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background-color: var(--primary-color);
+            color: var(--white);
+            text-align: center;
+            padding: 40px 0;
+        }
+
+        .cta-section h2 {
+            margin-bottom: 15px;
+        }
+
+        .cta-section p {
+            margin-bottom: 20px;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark-color);
+            color: var(--white);
+            padding: 40px 0 0;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .footer-col h3 {
+            color: var(--white);
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+        }
+
+        .footer-col p {
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 15px;
+        }
+
+        .footer-col ul {
+            list-style: none;
+            margin-bottom: 20px;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-col ul li i {
+            margin-right: 10px;
+            color: var(--primary-color);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: var(--white);
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            background-color: var(--primary-color);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding: 20px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.9rem;
+        }
+
+        /* Tablet Styles */
+        @media (min-width: 768px) {
+            .menu-toggle {
+                display: none;
+            }
+
+            nav {
+                width: auto;
+                max-height: none;
+                padding: 0;
+            }
+
+            nav ul {
+                flex-direction: row;
+            }
+
+            nav ul li {
+                margin-left: 20px;
+            }
+
+            .cta-button {
+                display: block;
+            }
+
+            .hero .container {
+                flex-direction: row;
+                align-items: center;
+            }
+
+            .hero-content {
+                order: 1;
+                flex: 1;
+                padding-right: 30px;
+                text-align: left;
+                padding-top: 0;
+            }
+
+            .hero-image {
+                order: 2;
+                flex: 1;
+            }
+
+            .hero-buttons {
+                flex-direction: row;
+            }
+
+            .features-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .footer-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* Desktop Styles */
+        @media (min-width: 992px) {
+            .logo h1 {
+                font-size: 1.8rem;
+            }
+
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .features-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+
+            .footer-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -14,6 +458,11 @@
             <div class="logo">
                 <h1>Xtreme Commerce</h1>
             </div>
+            
+            <button class="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </button>
+            
             <nav>
                 <ul>
                     <li><a href="index.html">Home</a></li>
@@ -23,6 +472,7 @@
                     <li><a href="classes.html">Online Classes</a></li>
                 </ul>
             </nav>
+            
             <div class="cta-button">
                 <a href="https://wa.me/923125899189" class="btn whatsapp-btn">
                     <i class="fab fa-whatsapp"></i> Chat Now
@@ -42,7 +492,7 @@
                 </div>
             </div>
             <div class="hero-image">
-                <img src="images/poster.png" alt="E-commerce Learning">
+                <img src="images/poster.png" alt="E-commerce Learning" class="responsive-hero-image">
             </div>
         </div>
     </section>
@@ -79,7 +529,10 @@
         <div class="container">
             <h2>What Our Students Say</h2>
             <div class="testimonial-slider">
-                <!-- Testimonials will be loaded via JavaScript -->
+                <div class="testimonial">
+                    <p>"Xtreme Commerce transformed my online business. Went from Rs. 20k to Rs. 500k/month in just 3 months!"</p>
+                    <div class="author">- Ahmed R., Lahore</div>
+                </div>
             </div>
         </div>
     </section>
@@ -134,6 +587,46 @@
         </div>
     </footer>
 
-    <script src="js/script.js"></script>
+    <script>
+        // Mobile Menu Toggle
+        document.querySelector('.menu-toggle').addEventListener('click', function() {
+            document.querySelector('nav').classList.toggle('active');
+        });
+
+        // Testimonial Data
+        const testimonials = [
+            {
+                text: "Xtreme Commerce transformed my online business. Went from Rs. 20k to Rs. 500k/month in just 3 months!",
+                author: "Ahmed R., Lahore"
+            },
+            {
+                text: "The practical strategies taught here are game-changers. My Shopify store is now profitable!",
+                author: "Fatima K., Karachi"
+            },
+            {
+                text: "Best investment I've made. The community support alone is worth the course fee.",
+                author: "Bilal S., Islamabad"
+            }
+        ];
+
+        // Load Testimonials
+        function loadTestimonials() {
+            const slider = document.querySelector('.testimonial-slider');
+            testimonials.forEach(testimonial => {
+                const testimonialDiv = document.createElement('div');
+                testimonialDiv.className = 'testimonial';
+                testimonialDiv.innerHTML = `
+                    <p>"${testimonial.text}"</p>
+                    <div class="author">- ${testimonial.author}</div>
+                `;
+                slider.appendChild(testimonialDiv);
+            });
+        }
+
+        // Initialize on DOM load
+        document.addEventListener('DOMContentLoaded', function() {
+            loadTestimonials();
+        });
+    </script>
 </body>
 </html>
