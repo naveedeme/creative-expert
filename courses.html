@@ -9,14 +9,13 @@
     <style>
         /* CSS Variables */
         :root {
-            --primary-color: #4a6bff;
-            --secondary-color: #ff6b6b;
-            --dark-color: #2c3e50;
-            --light-color: #f8f9fa;
-            --white: #fff;
-            --black: #000;
-            --text-light: #6c757d;
-            --box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            --primary-color: #667eea;
+            --secondary-color: #764ba2;
+            --dark-color: #2d3748;
+            --white: #ffffff;
+            --light-bg: #f8f9fa;
+            --text-light: #718096;
+            --box-shadow: 0 5px 15px rgba(0,0,0,0.1);
             --transition: all 0.3s ease;
         }
 
@@ -26,20 +25,21 @@
             padding: 0;
             box-sizing: border-box;
         }
-
+        
         body {
             font-family: 'Poppins', sans-serif;
             line-height: 1.6;
             color: var(--dark-color);
-            background-color: var(--light-color);
+            background-color: var(--light-bg);
         }
-
+        
         .container {
             width: 100%;
             max-width: 1200px;
-            padding: 0 15px;
             margin: 0 auto;
+            padding: 0 20px;
         }
+
 
         a {
             text-decoration: none;
@@ -94,7 +94,12 @@
         }
 
         section {
-            padding: 60px 0;
+            padding: 80px 0;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding-top: 100px;
         }
 
         h1, h2, h3, h4, h5, h6 {
@@ -112,81 +117,103 @@
         header {
             background-color: var(--white);
             box-shadow: var(--box-shadow);
-            position: fixed;
-            width: 100%;
+            position: sticky;
             top: 0;
-            left: 0;
-            z-index: 1000;
-            padding: 15px 0;
+            z-index: 100;
         }
-
+        
         header .container {
             display: flex;
-            flex-wrap: wrap;
             justify-content: space-between;
             align-items: center;
+            padding: 15px 20px;
         }
-
+        
         .logo h1 {
             color: var(--primary-color);
             font-size: 1.5rem;
             font-weight: 700;
         }
+        
 
         /* Mobile Menu */
         .menu-toggle {
-            display: block;
-            font-size: 1.5rem;
+            display: none;
             cursor: pointer;
+            font-size: 1.5rem;
             color: var(--dark-color);
             background: none;
             border: none;
         }
-
-        nav {
-            width: 100%;
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease;
-        }
-
-        nav.active {
-            max-height: 500px;
-            padding: 15px 0;
-        }
-
+        
         nav ul {
-            list-style: none;
             display: flex;
-            flex-direction: column;
+            list-style: none;
         }
-
+        
         nav ul li {
-            margin: 10px 0;
+            margin-left: 20px;
         }
-
+        
         nav ul li a {
+            text-decoration: none;
             color: var(--dark-color);
             font-weight: 500;
-            padding: 5px 0;
-            display: block;
+            transition: var(--transition);
         }
-
-        nav ul li a.active,
-        nav ul li a:hover {
+        
+        nav ul li a:hover, 
+        nav ul li a.active {
             color: var(--primary-color);
         }
-
-        .cta-button {
-            display: none;
+        
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-weight: 500;
+            text-decoration: none;
+            transition: var(--transition);
         }
+        
+        .whatsapp-btn {
+            display: inline-block;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-weight: 500;
+            text-decoration: none;
+            transition: var(--transition);
+            background-color: #25D366;
+            color: var(--white);
+            border: none;
+        }
+        
+        .whatsapp-btn:hover {
+            background-color: #128C7E;
+        }
+        
+        .whatsapp-btn i {
+            margin-right: 8px;
+        }
+        
+        .secondary-btn {
+            background-color: var(--white);
+            color: var(--primary-color);
+            border: 1px solid var(--primary-color);
+        }
+        
+        .secondary-btn:hover {
+            background-color: var(--primary-color);
+            color: var(--white);
+        }
+
 
         /* Page Header */
         .page-header {
             text-align: center;
             padding: 50px 0 30px;
             background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            margin-top: 50px;
+            margin-top: 0px;
         }
 
         .page-header h1 {
@@ -496,9 +523,6 @@
                 margin-left: 20px;
             }
 
-            .cta-button {
-                display: block;
-            }
 
             .page-header {
                 padding: 120px 0 80px;
@@ -536,59 +560,84 @@
         }
 
         /* Desktop Styles */
-        @media (min-width: 992px) {
-            .logo h1 {
-                font-size: 1.8rem;
+        @media (max-width: 768px) {
+            header .container {
+                flex-wrap: wrap;
             }
-
-            .page-header h1 {
-                font-size: 3.5rem;
+            
+            .menu-toggle {
+                display: block;
+                order: 1;
             }
-
-            .free-course-banner h2 {
-                font-size: 3rem;
+            
+            .logo {
+                order: 2;
+                flex: 1;
+                text-align: center;
             }
-
-            .footer-grid {
-                grid-template-columns: repeat(4, 1fr);
+            
+            .cta-button {
+                order: 3;
+                margin-left: auto;
+            }
+            
+            nav {
+                order: 4;
+                width: 100%;
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.3s ease;
+            }
+            
+            nav.active {
+                max-height: 300px;
+                padding: 15px 0;
+            }
+            
+            nav ul {
+                flex-direction: column;
+            }
+            
+            nav ul li {
+                margin: 10px 0 0;
+                margin-left: 0;
+                padding: 0 20px;
             }
         }
+
     </style>
 </head>
 <body>
     <header>
         <div class="container">
-            <div class="logo">
-                <h1>Xtreme Commerce</h1>
-            </div>
-            
             <button class="menu-toggle">
                 <i class="fas fa-bars"></i>
             </button>
-            
-            <nav>
+            <div class="logo">
+                <h1>Xtreme Commerce</h1>
+            </div>
+            <nav id="main-nav">
                 <ul>
-                    <li><a href="index.html">Home</a></li>
+                    <li><a href="index.html" class="active">Home</a></li>
                     <li><a href="about.html">About Us</a></li>
                     <li><a href="blog.html">Blog</a></li>
                     <li><a href="courses.html">Courses</a></li>
-                    <li><a href="classes.html" class="active">Online Classes</a></li>
+                    <li><a href="classes.html">Online Classes</a></li>
                 </ul>
             </nav>
-            
             <div class="cta-button">
-                <a href="https://chat.whatsapp.com/BCeVbb40yLPLa9un0GhkCX" class="btn whatsapp-btn">
+                <a href="https://chat.whatsapp.com/BCeVbb40yLPLa9un0GhkCX" class="whatsapp-btn">
                     <i class="fab fa-whatsapp"></i> Join Now
                 </a>
             </div>
         </div>
     </header>
 
+
     <section class="page-header">
         <div class="container">
             <h2>Earn Rs. 300k+ in a Month with this 03 Days Live training</h2>
-            <p>Limited time offer - Join now and start your e-commerce business today!</p>
-
+            <p>Limited time offer - Join now and transform your e-commerce business!</p>
         </div>
     </section>
 
@@ -706,8 +755,10 @@
     <script>
         // Mobile Menu Toggle
         document.querySelector('.menu-toggle').addEventListener('click', function() {
-            document.querySelector('nav').classList.toggle('active');
+            document.getElementById('main-nav').classList.toggle('active');
         });
+
+
 
         // Countdown timer for 5 minutes
         function startCountdown() {
