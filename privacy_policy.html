@@ -2,31 +2,623 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=<device-width>, initial-scale=1.0">
-    <title>Document</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* CSS Variables */
+        :root {
+            --primary-color: #667eea;
+            --secondary-color: #764ba2;
+            --dark-color: #2d3748;
+            --white: #ffffff;
+            --light-bg: #f8f9fa;
+            --text-light: #718096;
+            --box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            --transition: all 0.3s ease;
+        }
+
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--dark-color);
+            background-color: var(--light-bg);
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        a {
+            text-decoration: none;
+            color: var(--primary-color);
+            transition: var(--transition);
+        }
+
+        a:hover {
+            color: var(--secondary-color);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 25px;
+            border-radius: 5px;
+            font-weight: 500;
+            transition: var(--transition);
+            text-align: center;
+            font-size: 1rem;
+        }
+
+        .btn.primary-btn {
+            background-color: var(--primary-color);
+            color: var(--white);
+            border: 2px solid var(--primary-color);
+        }
+
+        .btn.primary-btn:hover {
+            background-color: transparent;
+            color: var(--primary-color);
+        }
+
+        .btn.secondary-btn {
+            background-color: transparent;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+        }
+
+        .btn.secondary-btn:hover {
+            background-color: var(--primary-color);
+            color: var(--white);
+        }
+
+        .btn.whatsapp-btn {
+            background-color: #25D366;
+            color: var(--white);
+            border: 2px solid #25D366;
+        }
+
+        .btn.whatsapp-btn:hover {
+            background-color: transparent;
+            color: #25D366;
+        }
+
+        section {
+            padding: 80px 0;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            margin-bottom: 20px;
+            font-weight: 600;
+            line-height: 1.2;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: var(--white);
+            box-shadow: var(--box-shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        /* Mobile Menu */
+        .menu-toggle {
+            display: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+            color: var(--dark-color);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 20px;
+        }
+        
+        nav ul li a {
+            text-decoration: none;
+            color: var(--dark-color);
+            font-weight: 500;
+            transition: var(--transition);
+        }
+        
+        nav ul li a:hover, 
+        nav ul li a.active {
+            color: var(--primary-color);
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-weight: 500;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .whatsapp-btn {
+            background-color: #25D366;
+            color: var(--white);
+        }
+        
+        .whatsapp-btn:hover {
+            background-color: #128C7E;
+        }
+        
+        .secondary-btn {
+            background-color: var(--white);
+            color: var(--primary-color);
+            border: 1px solid var(--primary-color);
+        }
+        
+        .secondary-btn:hover {
+            background-color: var(--primary-color);
+            color: var(--white);
+        }
+
+        .cta-button {
+            display: none;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding-top: 120px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        }
+
+        .hero .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .hero-content {
+            order: 2;
+            padding-top: 40px;
+        }
+
+        .hero-content h1 {
+            font-size: 2.2rem;
+            color: var(--primary-color);
+        }
+
+        .hero-content p {
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+            color: var(--dark-color);
+        }
+
+        .hero-image {
+            order: 1;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .hero-image img {
+            max-width: 300px;
+            border-radius: 10px;
+            box-shadow: var(--box-shadow);
+        }
+
+        .hero-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        /* Privacy Policy Content */
+        .privacy-policy {
+            background-color: var(--white);
+            padding: 80px 0;
+        }
+
+        .privacy-policy .container {
+            max-width: 800px;
+        }
+
+        .privacy-policy h1 {
+            color: var(--primary-color);
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .privacy-policy h2 {
+            color: var(--primary-color);
+            font-size: 1.8rem;
+            margin-top: 40px;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--light-bg);
+        }
+
+        .privacy-policy p {
+            margin-bottom: 20px;
+            color: var(--dark-color);
+            font-size: 1rem;
+        }
+
+        .privacy-policy ul {
+            margin-bottom: 20px;
+            padding-left: 20px;
+        }
+
+        .privacy-policy li {
+            margin-bottom: 10px;
+            color: var(--dark-color);
+        }
+
+        .privacy-policy strong {
+            color: var(--primary-color);
+        }
+
+        .effective-date {
+            text-align: center;
+            color: var(--text-light);
+            margin-bottom: 40px;
+            font-style: italic;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark-color);
+            color: var(--white);
+            padding: 60px 0 0;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .footer-col h3 {
+            color: var(--white);
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+        }
+
+        .footer-col p {
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 15px;
+            font-size: 0.95rem;
+        }
+
+        .footer-col ul {
+            list-style: none;
+            margin-bottom: 20px;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 12px;
+        }
+
+        .footer-col ul li a {
+            color: rgba(255, 255, 255, 0.7);
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+        }
+
+        .footer-col ul li a:hover {
+            color: var(--white);
+            padding-left: 5px;
+        }
+
+        .footer-col ul li i {
+            margin-right: 10px;
+            color: var(--primary-color);
+            width: 20px;
+            text-align: center;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: var(--white);
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            background-color: var(--primary-color);
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding: 20px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.9rem;
+        }
+
+        /* Tablet Styles */
+        @media (min-width: 768px) {
+            .menu-toggle {
+                display: none;
+            }
+
+            nav {
+                width: auto;
+                max-height: none;
+                padding: 0;
+            }
+
+            nav ul {
+                flex-direction: row;
+            }
+
+            nav ul li {
+                margin-left: 20px;
+            }
+
+            .cta-button {
+                display: block;
+            }
+
+            .hero {
+                padding-top: 100px;
+            }
+
+            .hero .container {
+                flex-direction: row;
+                text-align: left;
+                align-items: center;
+            }
+
+            .hero-content {
+                order: 1;
+                flex: 1;
+                padding-right: 40px;
+                padding-top: 0;
+            }
+
+            .hero-image {
+                order: 2;
+                flex: 1;
+                margin-bottom: 0;
+            }
+
+            .hero-image img {
+                max-width: 100%;
+            }
+
+            .hero-buttons {
+                flex-direction: row;
+                justify-content: flex-start;
+            }
+
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .footer-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* Desktop Styles */
+        @media (min-width: 992px) {
+            .logo h1 {
+                font-size: 1.8rem;
+            }
+
+            .hero-content h1 {
+                font-size: 3rem;
+            }
+
+            .hero-content p {
+                font-size: 1.2rem;
+            }
+
+            .privacy-policy h1 {
+                font-size: 3rem;
+            }
+
+            .footer-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            header .container {
+                flex-wrap: wrap;
+            }
+            
+            .menu-toggle {
+                display: block;
+                order: 1;
+            }
+            
+            .logo {
+                order: 2;
+                flex: 1;
+                text-align: center;
+            }
+            
+            .cta-button {
+                order: 3;
+            }
+            
+            nav {
+                order: 4;
+                width: 100%;
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.3s ease;
+            }
+            
+            nav.active {
+                max-height: 300px;
+                padding: 15px 0;
+            }
+            
+            nav ul {
+                flex-direction: column;
+            }
+            
+            nav ul li {
+                margin: 10px 0 0;
+                margin-left: 0;
+            }
+        }
+    </style>
 </head>
 <body>
-    <h1>Privacy Policy</h1> <br>
-    <p>Effective date: January 01, 2024</p> <br>
-    <p>Our Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website. Please read this privacy policy carefully. If you do not agree with the terms of this privacy policy, please do not access the site.</p> <br>
-    <h2>Information We Collect</h2>
-    <p>We may collect information about you in a variety of ways. The information we may collect on the Site includes:</p>  <br>
-    <p><strong>Personal Data:</strong> Personally identifiable information, such as your name, shipping address, email address, and telephone number, that you voluntarily give to us when you register on the Site or make a purchase.</p> <br>    
-    <p><strong>Derivative Data:</strong> Information our servers automatically collect when you access the Site, such as your IP address, browser type, operating system, access times, and pages viewed directly before and after accessing the Site.</p> <br>
-    <h2>Use of Your Information</h2>
-    <p>Having accurate information about you permits us to provide you with a smooth, efficient, and customized experience. Specifically, we may use information collected about you via the Site to:</p> <br>
-    <ul>
-        <li>Administer promotions.</li>
-        <li>Email you regarding your account or order.</li>
-        <li>Fulfill and manage purchases, orders, payments, and other transactions related to the Site.</li>
-        <li>Generate a personal profile about you to make future visits to the Site more personalized.</li> 
-        <li>Increase the efficiency and operation of the Site.</li>
-    </ul>
-    <h2>Disclosure of Your Information</h2>
-    <p>We may share information we have collected about you in certain situations. Your information may be disclosed as follows:</p> <br>
-    <ul>
-        <li><strong>By Law or to Protect Rights:</strong> If we believe the release of information about you is necessary to respond to legal process, to investigate or remedy potential violations of our policies, or to protect the rights, property, and safety of others.</li>
-        <li><strong>Third-Party Service Providers:</strong> We may share your information with third parties that perform services for us or on our behalf, including payment processing, data analysis, email delivery, hosting services, customer service, and marketing assistance.</li>
-    </ul>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="logo">YourBrand</div>
+            <div class="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="cta-button">
+                <a href="#" class="btn primary-btn">Get Started</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Privacy Policy Content -->
+    <section class="privacy-policy">
+        <div class="container">
+            <h1>Privacy Policy</h1>
+            <p class="effective-date">Effective date: January 01, 2024</p>
+            
+            <p>Our Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website. Please read this privacy policy carefully. If you do not agree with the terms of this privacy policy, please do not access the site.</p>
+            
+            <h2>Information We Collect</h2>
+            <p>We may collect information about you in a variety of ways. The information we may collect on the Site includes:</p>
+            
+            <p><strong>Personal Data:</strong> Personally identifiable information, such as your name, shipping address, email address, and telephone number, that you voluntarily give to us when you register on the Site or make a purchase.</p>
+            
+            <p><strong>Derivative Data:</strong> Information our servers automatically collect when you access the Site, such as your IP address, browser type, operating system, access times, and pages viewed directly before and after accessing the Site.</p>
+            
+            <h2>Use of Your Information</h2>
+            <p>Having accurate information about you permits us to provide you with a smooth, efficient, and customized experience. Specifically, we may use information collected about you via the Site to:</p>
+            
+            <ul>
+                <li>Administer promotions.</li>
+                <li>Email you regarding your account or order.</li>
+                <li>Fulfill and manage purchases, orders, payments, and other transactions related to the Site.</li>
+                <li>Generate a personal profile about you to make future visits to the Site more personalized.</li> 
+                <li>Increase the efficiency and operation of the Site.</li>
+            </ul>
+            
+            <h2>Disclosure of Your Information</h2>
+            <p>We may share information we have collected about you in certain situations. Your information may be disclosed as follows:</p>
+            
+            <ul>
+                <li><strong>By Law or to Protect Rights:</strong> If we believe the release of information about you is necessary to respond to legal process, to investigate or remedy potential violations of our policies, or to protect the rights, property, and safety of others.</li>
+                <li><strong>Third-Party Service Providers:</strong> We may share your information with third parties that perform services for us or on our behalf, including payment processing, data analysis, email delivery, hosting services, customer service, and marketing assistance.</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3>YourBrand</h3>
+                    <p>Providing quality services and solutions to help your business grow and succeed in the digital world.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html"><i class="fas fa-chevron-right"></i> Home</a></li>
+                        <li><a href="about.html"><i class="fas fa-chevron-right"></i> About Us</a></li>
+                        <li><a href="services.html"><i class="fas fa-chevron-right"></i> Services</a></li>
+                        <li><a href="contact.html"><i class="fas fa-chevron-right"></i> Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Services</h3>
+                    <ul>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Web Development</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Digital Marketing</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> SEO Optimization</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Content Creation</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Contact Info</h3>
+                    <ul>
+                        <li><a href="#"><i class="fas fa-map-marker-alt"></i> Blue Area, Islamabad, Pakistan</a></li>
+                        <li><a href="tel:923125899189"><i class="fas fa-phone">03125899189</i> </a></li>
+                        <li><a href="mailto:info@yourbrand.com"><i class="fas fa-envelope"></i> creative.experty@gmail.com</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 YourBrand. All Rights Reserved. | <a href="privacy.html" style="color: rgba(255, 255, 255, 0.7);">Privacy Policy</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.querySelector('.menu-toggle').addEventListener('click', function() {
+            document.querySelector('nav').classList.toggle('active');
+        });
+    </script>
 </body>
 </html>
